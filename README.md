@@ -8,21 +8,23 @@ LadonGo一款开源渗透扫描器框架，使用它可轻松批量探测C段、
 
 ### 功能
 
-Detection:
-PingScan        (Using system ping to detect Online hosts)
-IcmpScan        (Using ICMP Protocol to detect Online hosts)
-BannerScan      (Using HTTP Protocol to detect Banner hosts)
-WeblogicScan    (Using T3 Protocol to detect Weblogic hosts)
-PortScan        (Scan hosts open ports using TCP protocol)
-MS17010         (Using SMB Protocol to detect MS17010 hosts))
-SmbGhost        (Using SMB Protocol to detect SmbGhost hosts))
-
-Brute-Force:
-SmbScan         (Using SMB Protocol to Brute-For 445 Port))
-SshScan         (Using SSH Protocol to Brute-For 22 Port))
-FtpScan         (Using FTP Protocol to Brute-For 21 Port))
-MysqlScan       (Using Mysql Protocol to Brute-For 3306 Port))
-
+Detection:<br>
+PingScan        (Using system ping to detect Online hosts)<br>
+IcmpScan        (Using ICMP Protocol to detect Online hosts)<br>
+BannerScan      (Using HTTP Protocol to detect Banner hosts)<br>
+WeblogicScan    (Using T3 Protocol to detect Weblogic hosts)<br>
+PortScan        (Scan hosts open ports using TCP protocol)<br>
+MS17010         (Using SMB Protocol to detect MS17010 hosts))<br>
+SmbGhost        (Using SMB Protocol to detect SmbGhost hosts))<br>
+<br>
+Brute-Force:<br>
+SmbScan         (Using SMB Protocol to Brute-For 445 Port))<br>
+SshScan         (Using SSH Protocol to Brute-For 22 Port))<br>
+FtpScan         (Using FTP Protocol to Brute-For 21 Port))<br>
+MysqlScan       (Using Mysql Protocol to Brute-For 3306 Port))<br>
+<br>
+Example:<br>
+Ladon 192.168.1.8/24 MS17010
 ### 使用教程
 和Ladon一样，用法非常简单
 Ladon 目标IP/机器名/CIDR 扫描模块
