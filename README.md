@@ -2,6 +2,10 @@
 
 http://k8gege.org/Ladon/LadonGo.html
 
+### 简介
+LadonGo一款开源渗透扫描器框架，使用它可轻松批量探测C段、B段存活主机、指纹识别、端口扫描、密码爆破、高危漏洞检测等。
+1.0版本包含11个模块功能，高危漏洞检测MS17010、SmbGhost，密码爆破SmbScan、SshScan、FtpScan、MysqlScan等，存活探测/信息收集/指纹识别PingScan、IcmpScan，BannerScan、WeblogicScan等，端口扫描PortScan。
+
 ### Detection:
 PingScan        (Using system ping to detect Online hosts)<br>
 IcmpScan        (Using ICMP Protocol to detect Online hosts)<br>
