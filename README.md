@@ -74,10 +74,10 @@ Ladon 192.168.1.8/24 SmbScan<br>
 Ladon 192.168.1.8/24 SshScan<br>
 <br>
 扫描C段21端口FTP服务器弱口令<br>
-Ladon 192.168.1.8/24 SshScan<br>
+Ladon 192.168.1.8/24 FtpScan<br>
 <br>
 扫描C段3306端口Mysql服务器弱口令<br>
-Ladon 192.168.1.8/24 SshScan
+Ladon 192.168.1.8/24 MysqlScan
 
 
 ### 扫描速度
