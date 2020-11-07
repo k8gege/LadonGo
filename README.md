@@ -1,4 +1,4 @@
-# Ladon For Golang (Windows\Linux\MacOS)
+# Ladon For Golang
 
 http://k8gege.org/Ladon/LadonGo.html
 
