@@ -122,7 +122,6 @@ https://github.com/k8gege/LadonGo
 7.0版本：http://k8gege.org/Download<br>
 7.5版本：K8小密圈<br>
 
-
 <div style="text-align: center; width: 710px; border: green solid 0px;">
 <img alt="" src="http://k8gege.org/img/k8team.jpg" style="display: inline-block;width: 250px;height: 300px;" />
 </div>
