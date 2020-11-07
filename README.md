@@ -125,3 +125,8 @@ https://github.com/k8gege/LadonGo
 <div style="text-align: center; width: 710px; border: green solid 0px;">
 <img alt="" src="http://k8gege.org/img/k8team.jpg" style="display: inline-block;width: 250px;height: 300px;" />
 </div>
+
+### 为什么使用GO
+现有Ladon版本无法兼容一些系统，代理又丢包非常蛋疼。虽然Python版也是跨平台，但是编译体积大，二是有些依赖包（依赖底层库）在某些系统安装非常麻烦甚至装不上，有些编译后不能执行等原因。所以这几天重新学了下GO，现学现卖使用Golang重写Ladon框架，先加一些功能看看效果，GO和PY差不多很简单，框架弄好后，使用开源库一下就可以添加好几个功能模块，然后再测14个操作系统下程序的兼容性，无论性能、体积、兼容性都远甩Python几条街，最主要是编译的程序可在一些旧操作系统上执行，Python可能受限于py版本、相关依赖包或GCC、GLID、SSL等库版本影响，Go可以很好解决这些问题。
+
+缺点： 很多API库没有人封装或者根本不能用，想要实现Ladon的所有功能或者说一半的功能，两三个月都搞不定，如Ladon的OsScan模块用到的协议就已比这个LadonGo 1.0现在的11个功能还要多。如果用Python的话就非常快了，各种依赖库、各种现有POC，写好扫描框架，稍微改一下集成起来就是功能非常多的扫描器，但是目标PY版本低、操作系统老，本地编译再丢过去都不定能运行，本地都未必能编译，所以选用GO。
