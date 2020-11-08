@@ -89,17 +89,25 @@ Ladon 192.168.1.8/24 MysqlScan
 
 #### TestOn
 
-Kali 2019<br>
-SUSE 10<br>
-CentOS 5.8<br>
-CentOS 6.8  <br>
-Fedora5<br>
-XP、2003、Win7、Win8.1、Win10、2008 R2、2012 R2<br>
-RedHat5.7 <br>
-BT5-R3  (Ubuntu 8)<br>
-MacOS 10.15<br>
-<br>
-以上系统测试成功，其它系统未测，若某些系统不支持可自行编译
+ID | OS  
+-|-|-
+0 | WinXP
+1 | Win2003
+2 | Win7
+3 | Win8.1
+4 | Win10
+5 | Win2008 R2
+6 | Win2012 R2
+7 | Kali 2019
+8 | SUSE 10
+9 | CentOS 5.8
+10 | CentOS 6.8  
+11 | Fedora5
+12 | RedHat5.7 
+13 | BT5-R3  (Ubuntu 8)
+14 | MacOS 10.15
+
+以上系统测试成功，其它系统未测
 
 
 #### MacOS x64 10.15
