@@ -1,8 +1,8 @@
 package logger
 //Ladon Scanner for golang 
 //Author: k8gege
-//K8Blog: http://k8gege.org
-//Github: https://github.com/k8gege
+//K8Blog: http://k8gege.org/Ladon
+//Github: https://github.com/k8gege/LadonGo
 import (
 	"fmt"
 	"log"

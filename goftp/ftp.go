@@ -1,5 +1,8 @@
 package goftp
-
+//Ladon Scanner for golang 
+//Author: k8gege
+//K8Blog: http://k8gege.org/Ladon
+//Github: https://github.com/k8gege/LadonGo
 import (
 	"bufio"
 	"crypto/tls"

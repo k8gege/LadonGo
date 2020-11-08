@@ -1,5 +1,8 @@
 package goftp
-
+//Ladon Scanner for golang 
+//Author: k8gege
+//K8Blog: http://k8gege.org/Ladon
+//Github: https://github.com/k8gege/LadonGo
 // FTP Status codes, defined in RFC 959
 const (
 	StatusFileOK                = "150"
