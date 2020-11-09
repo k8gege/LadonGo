@@ -42,6 +42,12 @@ Ladon BruteForce
 
 #### 用法
 Ladon IP/机器名/CIDR 扫描模块
+```Bash
+Ladon 192.168.1.8/24 MS17010
+Ladon 192.168.1/c MS17010
+Ladon 192.168/b MS17010
+Ladon 192/a MS17010
+```
 
 #### 例子
 
@@ -89,7 +95,7 @@ Ladon 192.168.1.8/24 MysqlScan
 
 #### TestOn
 
-ID | OS  
+ID | OS 
 -|-
 0 | WinXP
 1 | Win 2003
@@ -98,14 +104,20 @@ ID | OS
 4 | Win 10
 5 | Win 2008 R2
 6 | Win 2012 R2
-7 | Kali 2019
-8 | SUSE 10
-9 | CentOS 5.8
-10 | CentOS 6.8  
-11 | Fedora 5
-12 | RedHat 5.7 
-13 | BT5-R3  (Ubuntu 8)
-14 | MacOS 10.15
+7 | Win 2019
+8 | Kali 1.0.2
+9 | Kali 2018
+10 | Kali 2019
+11 | SUSE 10
+12 | CentOS 5.8
+13 | CentOS 6.3
+14 | CentOS 6.8  
+15 | Fedora 5
+16 | RedHat 5.7 
+17 | BT5-R3  
+18 | MacOS 10.15
+19 | Ubuntu 8
+20 | Ubuntu 18
 
 以上系统测试成功，其它系统未测,若不支持可自行编译
 
