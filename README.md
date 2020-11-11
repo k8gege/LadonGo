@@ -1,9 +1,10 @@
-# Ladon For Golang
+# Ladon Scanner For Golang
 
-Whttp://k8gege.org/Ladon/LadonGo.html
+### Wiki
+http://k8gege.org/Ladon/LadonGo.html
 
 ### 简介
-LadonGo一款开源渗透扫描器框架，使用它可轻松批量探测C段、B段存活主机、指纹识别、端口扫描、密码爆破、高危漏洞检测等。1.0版本包含11个模块功能，高危漏洞检测MS17010、SmbGhost，密码爆破SmbScan、SshScan、FtpScan、MysqlScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，BannerScan、WeblogicScan，端口扫描PortScan。
+LadonGo一款开源渗透扫描器框架，使用它可轻松批量探测C段、B段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。2.0版本包含15个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、WinrmScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，BannerScan、HttpTitle、WeblogicScan，端口扫描PortScan。
 
 ### 功能模块
 
@@ -16,14 +17,18 @@ PortScan        (Scan hosts open ports using TCP protocol)<br>
 MS17010         (Using SMB Protocol to detect MS17010 hosts))<br>
 SmbGhost        (Using SMB Protocol to detect SmbGhost hosts))<br>
 <br>
-Brute-Force:<br>
+BruteForce:<br>
 SmbScan         (Using SMB Protocol to Brute-For 445 Port))<br>
 SshScan         (Using SSH Protocol to Brute-For 22 Port))<br>
 FtpScan         (Using FTP Protocol to Brute-For 21 Port))<br>
 MysqlScan       (Using Mysql Protocol to Brute-For 3306 Port))<br>
 <br>
+
 Example:<br>
 Ladon 192.168.1.8/24 MS17010
+Ladon 192.168.1/c MS17010
+Ladon 192.168/b MS17010
+Ladon 192/a MS17010
 
 ### 源码编译
 ```Bash
@@ -69,8 +74,10 @@ T3扫描C段开放WebLogic的主机<br>
 Ladon 192.168.1.8/24 T3Scan<br>
 <br>
 HTTP扫描C段开放Web站点Banner<br>
-Ladon 192.168.1.8/24 BannerScan
-
+Ladon 192.168.1.8/24 BannerScan<br>
+<br>
+HTTP扫描C段开放Web站点标题<br>
+Ladon 192.168.1.8/24 HttpTitle<br>
 
 ##### 密码爆破、弱口令
 扫描C段445端口Windows机器弱口令<br>
@@ -83,7 +90,19 @@ Ladon 192.168.1.8/24 SshScan<br>
 Ladon 192.168.1.8/24 FtpScan<br>
 <br>
 扫描C段3306端口Mysql服务器弱口令<br>
-Ladon 192.168.1.8/24 MysqlScan
+Ladon 192.168.1.8/24 MysqlScan<br>
+<br>
+扫描C段5985端口Winrm服务器弱口令<br>
+Ladon 192.168.1.8/24 WinrmScan<br>
+
+##### 远程执行
+
+```Bash
+Ladon SshCmd host port user pass cmd
+Ladon WinrmCmd host port user pass cmd
+```
+
+![image](http://k8gege.org/k8img/LadonGo/LnxSshWinrm.PNG)
 
 
 ### 扫描速度
