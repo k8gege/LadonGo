@@ -28,6 +28,8 @@ RemoteExec:<br>
 SshCmd          (SSH Remote command execution Default 22 Port))<br>
 WinrmCmd        (Winrm Remote command execution Default 5985 Port))<br>
 
+![image](http://k8gege.org/k8img/LadonGo/Help.PNG)
+
 ### 源码编译
 ```Bash
 go get github.com/k8gege/LadonGo
