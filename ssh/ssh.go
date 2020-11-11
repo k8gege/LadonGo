@@ -14,6 +14,10 @@ import (
 	//"log"
 )
 
+var SshHelp = func () {
+    fmt.Println("Usage: Ladon SshCmd host port user pass cmd")
+}
+
 type Node struct {
     User     string
     Password string
@@ -62,6 +66,32 @@ func (this *Node) Conn(addr string,port string) (*ssh.Client, error) {
 
     return client, nil
 }
+
+func ExecCmd(host string, port string, user string, pass string, cmdline string) {
+
+    node := NewNode(user, pass)
+    client, err := node.Conn(host,port)
+	if err == nil{
+			defer client.Close()
+		    session, err := client.NewSession()
+			if err != nil {
+				fmt.Println("Create ssh session fail!",err)
+			}
+			defer session.Close()
+			combo,err := session.CombinedOutput(cmdline)
+			if err != nil {
+				fmt.Println("ExecCmd fail!",err)
+			}
+			fmt.Println(string(combo))
+	}
+    if err != nil {
+        fmt.Println(err)
+    }
+    defer client.Close()
+	
+
+}
+
 
 func SshCheck(host string, port string, user string, pass string) ( result bool,err error) {
 	result = false
@@ -145,7 +175,7 @@ func SshScan(ScanType string,Target string) {
 				fmt.Println("Check... "+Target+" "+u+" "+p)
 				res,err := SshAuth(Target, "22", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok(ScanType,Target,u, p)
+					logger.PrintIsok2(ScanType,Target,"22",u, p)
 					break Loop
 				}
 			}

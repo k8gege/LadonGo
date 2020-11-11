@@ -37,7 +37,7 @@ func FtpScan(ScanType string,Target string) {
 				fmt.Println("Check... "+Target+" "+u+" "+p)
 				res,err := FtpAuth(Target, "21", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok(ScanType,Target,u, p)
+					logger.PrintIsok2(ScanType,Target,"21",u, p)
 					break Loop
 				}
 			}

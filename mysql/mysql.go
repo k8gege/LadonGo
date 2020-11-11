@@ -31,7 +31,7 @@ func MysqlScan(ScanType string,Target string) {
 				fmt.Println("Check... "+Target+" "+u+" "+p)
 				res,err := MysqlAuth(Target, "3306", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok(ScanType,Target,u, p)
+					logger.PrintIsok2(ScanType,Target,"3306",u, p)
 					break Loop
 				}
 			}

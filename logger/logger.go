@@ -9,8 +9,8 @@ import (
 	"os"
 	"runtime"
 )
-//
-func PrintIsok(ScanType,h string,u string,p string){
+
+func PrintIsok(ScanType,h ,u ,p string){
 	if runtime.GOOS=="windows" {
 		fmt.Println("Found: "+h+" "+u+" "+p+" ISOK")
 	} else
@@ -21,4 +21,17 @@ func PrintIsok(ScanType,h string,u string,p string){
 		}
 		log.SetOutput(logFile)
 		log.Println("Found: "+h+" "+u+" "+p+" ISOK")
+}
+
+func PrintIsok2(ScanType,h ,port,u ,p string){
+	if runtime.GOOS=="windows" {
+		fmt.Println("Found: "+h+" "+port+" "+u+" "+p+" ISOK")
+	} else
+	{fmt.Println("\033[35mFound: "+h+" "+port+" "+u+" "+p+" ISOK\033[0m")}
+		logFile, err := os.OpenFile(ScanType+".Log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0777)
+		if err != nil {
+			panic(err)
+		}
+		log.SetOutput(logFile)
+		log.Println("Found: "+h+" "+port+" "+u+" "+p+" ISOK")
 }
