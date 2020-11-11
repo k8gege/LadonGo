@@ -25,10 +25,10 @@ MysqlScan       (Using Mysql Protocol to Brute-For 3306 Port))<br>
 <br>
 
 Example:<br>
-Ladon 192.168.1.8/24 MS17010
-Ladon 192.168.1/c MS17010
-Ladon 192.168/b MS17010
-Ladon 192/a MS17010
+Ladon 192.168.1.8/24 MS17010<br>
+Ladon 192.168.1/c MS17010<br>
+Ladon 192.168/b MS17010<br>
+Ladon 192/a MS17010<br>
 
 ### 源码编译
 ```Bash
