@@ -24,11 +24,9 @@ FtpScan         (Using FTP Protocol to Brute-For 21 Port))<br>
 MysqlScan       (Using Mysql Protocol to Brute-For 3306 Port))<br>
 <br>
 
-Example:<br>
-Ladon 192.168.1.8/24 MS17010<br>
-Ladon 192.168.1/c MS17010<br>
-Ladon 192.168/b MS17010<br>
-Ladon 192/a MS17010<br>
+RemoteExec:<br>
+SshCmd          (SSH Remote command execution Default 22 Port))<br>
+WinrmCmd        (Winrm Remote command execution Default 5985 Port))<br>
 
 ### 源码编译
 ```Bash
