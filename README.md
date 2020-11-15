@@ -8,44 +8,23 @@ LadonGo一款开源渗透扫描器框架，使用它可轻松批量探测C段、
 
 ### 功能模块
 
-Detection:<br>
-
  . | . 
 -|-
-PingScan |         (Using system ping to detect Online hosts)<br>
-IcmpScan |         (Using ICMP Protocol to detect Online hosts)<br>
-HttpBanner |       (Using HTTP Protocol Scan Web Banner)<br>
-HttpTitle |        (Using HTTP protocol Scan Web titles)<br>
-T3Scan |           (Using T3 Protocol Scan Weblogic hosts)<br>
-PortScan |         (Scan hosts open ports using TCP protocol)<br>
-
-
-VulDetection:<br>
-
- . | . 
--|-
-MS17010 |          (Using SMB Protocol to detect MS17010 hosts))<br>
-SmbGhost |         (Using SMB Protocol to detect SmbGhost hosts))<br>
-
-
-BruteForce:<br>
-
- . | . 
--|-
-SmbScan |          (Using SMB Protocol to Brute-For 445 Port))<br>
-SshScan |          (Using SSH Protocol to Brute-For 22 Port))<br>
-FtpScan |          (Using FTP Protocol to Brute-For 21 Port))<br>
-MysqlScan |        (Using Mysql Protocol to Brute-For 3306 Port))<br>
-WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port))<br>
-
-
-RemoteExec:<br>
-
- . | . 
--|-
-SshCmd |           (SSH Remote command execution Default 22 Port))<br>
-WinrmCmd |         (Winrm Remote command execution Default 5985 Port))<br>
-
+PingScan |         (Using system ping to detect Online hosts)
+IcmpScan |         (Using ICMP Protocol to detect Online hosts)
+HttpBanner |       (Using HTTP Protocol Scan Web Banner)
+HttpTitle |        (Using HTTP protocol Scan Web titles)
+T3Scan |           (Using T3 Protocol Scan Weblogic hosts)
+PortScan |         (Scan hosts open ports using TCP protocol)
+MS17010 |          (Using SMB Protocol to detect MS17010 hosts))
+SmbGhost |          (Using SMB Protocol to detect SmbGhost hosts))
+SmbScan |          (Using SMB Protocol to Brute-For 445 Port))
+SshScan |          (Using SSH Protocol to Brute-For 22 Port))
+FtpScan |          (Using FTP Protocol to Brute-For 21 Port))
+MysqlScan |        (Using Mysql Protocol to Brute-For 3306 Port))
+WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port))
+SshCmd |           (SSH Remote command execution Default 22 Port))
+WinrmCmd |         (Winrm Remote command execution Default 5985 Port))
 
 ![image](http://k8gege.org/k8img/LadonGo/Help.PNG)
 
