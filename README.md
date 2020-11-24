@@ -164,23 +164,22 @@ Ladon WinrmCmd host port user pass cmd
 
 ![image](http://k8gege.org/k8img/LadonGo/LnxSshWinrm.PNG)
 
-### 扫描速度
-1.和Ladon一样，ICMP探测C段仅需1秒<br>
-2.Ping扫描C段大约11秒，支持任意权限<br>
-3.其它模块，欢迎大家反馈<br>
-
 #### 扫C段(192.168.1/c)
-ICMP 仅3ms  1/20秒 <br>
-WebTitle 10毫秒 1/6秒<br>
-T3Scan 约15毫秒 1/4秒<br>
-EthScan 2ms  1/30秒<br>
+ . | . | . 
+-|-|-
+ICMP |仅3ms  |1/20秒
+WebTitle| 10毫秒| 1/6秒
+T3Scan |约15毫秒| 1/4秒
+EthScan |2ms | 1/30秒
 
 #### 扫B段(192.168/b)
-EthScan   23分钟  1个端口<br>
-T3Scan     1小时   4个端口<br>
-WebTitle  40分钟  1个端口<br>
-MS17010  12分钟  1个端口<br>
-Snmp      20分钟 1个端口<br>
+ . | . | . 
+-|-|-
+EthScan  | 23分钟 |  1个端口
+T3Scan   |  1小时 |  4个端口
+WebTitle | 40分钟 | 1个端口
+MS17010  |12分钟 | 1个端口
+Snmp    |  20分钟| 1个端口
 
 PS：扫描速度实际上和Ladon .net版速度也差不多，只是没专门记录，因为重写测试过程中顺便记录一下GO版速度
 
