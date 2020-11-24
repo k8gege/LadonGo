@@ -1,37 +1,70 @@
-<<<<<<< HEAD
+
 # Ladon Scanner For Golang
 ### Wiki
 http://k8gege.org/Ladon/LadonGo.html<br>
-=======
-# Ladon For Golang
-
-### Wiki
-http://k8gege.org/Ladon/LadonGo.html
->>>>>>> LadonGo
 
 ### 简介
-LadonGo一款开源渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。2.0版本包含15个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、WinrmScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，BannerScan、HttpTitle、WeblogicScan，端口扫描PortScan。<br>
+LadonGo一款开源网络渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.0版本包含23个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan。<br>
 
+### 开发环境
+OS: Kali 2019<br>
+IDE: Mousepad<br>
+Go:  1.13<br>
 
 ### 功能模块
+
+#### Detection
 
  . | . 
 -|-
 PingScan |         (Using system ping to detect Online hosts)
 IcmpScan |         (Using ICMP Protocol to detect Online hosts)
+SnmpScan |         (Using Snmp Protocol to detect Online hosts)
 HttpBanner |       (Using HTTP Protocol Scan Web Banner)
 HttpTitle |        (Using HTTP protocol Scan Web titles)
 T3Scan |           (Using T3 Protocol Scan Weblogic hosts)
 PortScan |         (Scan hosts open ports using TCP protocol)
-MS17010 |          (Using SMB Protocol to detect MS17010 hosts))
-SmbGhost |          (Using SMB Protocol to detect SmbGhost hosts))
-SmbScan |          (Using SMB Protocol to Brute-For 445 Port))
-SshScan |          (Using SSH Protocol to Brute-For 22 Port))
-FtpScan |          (Using FTP Protocol to Brute-For 21 Port))
-MysqlScan |        (Using Mysql Protocol to Brute-For 3306 Port))
-WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port))
-SshCmd |           (SSH Remote command execution Default 22 Port))
-WinrmCmd |         (Winrm Remote command execution Default 5985 Port))
+TcpBanner |        (Scan hosts open ports using TCP protocol)
+OxidScan |         (Using dcom Protocol enumeration network interfaces)
+
+
+#### VulDetection
+
+ . | . 
+-|-
+MS17010 |          (Using SMB Protocol to detect MS17010 hosts)
+SmbGhost |         (Using SMB Protocol to detect SmbGhost hosts)
+
+
+#### BruteForce
+
+ . | . 
+-|-
+SmbScan |          (Using SMB Protocol to Brute-For 445 Port)
+SshScan |          (Using SSH Protocol to Brute-For 22 Port)
+FtpScan |          (Using FTP Protocol to Brute-For 21 Port)
+401Scan |          (Using HTTP BasicAuth to Brute-For web Port)
+MysqlScan |        (Using Mysql Protocol to Brute-For 3306 Port)
+MssqlScan |        (Using Mssql Protocol to Brute-For 1433 Port)
+OracleScan |       (Using Oracle Protocol to Brute-For 1521 Port)
+WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port)
+SqlplusScan |      (Using Oracle Sqlplus Brute-For 1521 Port)
+
+
+#### RemoteExec
+
+ . | . 
+-|-
+SshCmd |           (SSH Remote command execution Default 22 Port)
+WinrmCmd |         (Winrm Remote command execution Default 5985 Port)
+
+
+#### Exploit
+
+ . | . 
+-|-
+PhpStudyDoor |     (PhpStudy 2016 & 2018 BackDoor Exploit)
+
 
 ![image](http://k8gege.org/k8img/LadonGo/Help.PNG)
 
@@ -45,18 +78,27 @@ go build Ladon.go
 
 #### 帮助
 ```Bash
-Ladon help
+Ladon FuncList
 Ladon Detection
-Ladon BruteForce
+Ladon VulDetection
+adon BruteFor
+Ladon RemoteExec
+Ladon Exploit
+Ladon Example
 ```
 
 #### 用法
-Ladon IP/机器名/CIDR 扫描模块<br>
+Ladon IP/机器名/CIDR/URL/txt 扫描模块
+
 ```Bash
 Ladon 192.168.1.8/24 MS17010
 Ladon 192.168.1/c MS17010
 Ladon 192.168/b MS17010
 Ladon 192/a MS17010
+Ladon 192.168.1-192.168.5 MS17010
+Ladon http://192.168.1.8:8080 BasicAuthScan
+Ladon ip.txt MS17010
+Ladon url.txt HttpBanner
 ```
 
 #### 例子
@@ -68,6 +110,9 @@ Ladon 192.168.1.8/24 PingScan<br>
 
 ICMP扫描C段存活主机(管理员权限)<br>
 Ladon 192.168.1.8/24 IcmpScan<br>
+
+SNMP扫描C段存活主机、设备信息<br>
+Ladon 192.168.1.8/24 SnmpScan<br>
 
 SMB扫描C段永恒之蓝MS17010漏洞主机<br>
 Ladon 192.168.1.8/24 MS17010<br>
@@ -84,6 +129,12 @@ Ladon 192.168.1.8/24 BannerScan<br>
 HTTP扫描C段开放Web站点标题<br>
 Ladon 192.168.1.8/24 HttpTitle<br>
 
+TCP扫描C段开放端口服务信息<br>
+Ladon 192.168.1.8/24 TcpBanner<br>
+
+TCP扫描C段主机常见开放端口<br>
+Ladon 192.168.1.8/24 PortScan<br>
+
 ##### 密码爆破、弱口令
 
 扫描C段445端口Windows机器弱口令<br>
@@ -97,6 +148,12 @@ Ladon 192.168.1.8/24 FtpScan<br>
 
 扫描C段3306端口Mysql服务器弱口令<br>
 Ladon 192.168.1.8/24 MysqlScan<br>
+
+扫描C段1521端口Oracle服务器弱口令<br>
+Ladon 192.168.1.8/24 OracleScan<br>
+
+扫描C段1521端口Oracle服务器弱口令<br>
+Ladon 192.168.1.8/24 SqlplusScan<br>
 
 扫描C段5985端口Winrm服务器弱口令<br>
 Ladon 192.168.1.8/24 WinrmScan<br>
@@ -119,29 +176,29 @@ Ladon WinrmCmd host port user pass cmd
 
 #### TestOn
 
-ID | OS <br>
+ID | OS 
 -|-
-0 | WinXP<br>
-1 | Win 2003<br>
-2 | Win 7<br>
-3 | Win 8.1<br>
-4 | Win 10<br>
-5 | Win 2008 R2<br>
-6 | Win 2012 R2<br>
-7 | Win 2019<br>
-8 | Kali 1.0.2<br>
-9 | Kali 2018<br>
-10 | Kali 2019<br>
-11 | SUSE 10<br>
-12 | CentOS 5.8<br>
-13 | CentOS 6.3<br>
-14 | CentOS 6.8  <br>
-15 | Fedora 5<br>
-16 | RedHat 5.7 <br>
-17 | BT5-R3  <br>
-18 | MacOS 10.15<br>
-19 | Ubuntu 8<br>
-20 | Ubuntu 18<br>
+0 | WinXP
+1 | Win 2003
+2 | Win 7
+3 | Win 8.1
+4 | Win 10
+5 | Win 2008 R2
+6 | Win 2012 R2
+7 | Win 2019
+8 | Kali 1.0.2
+9 | Kali 2018
+10 | Kali 2019
+11 | SUSE 10
+12 | CentOS 5.8
+13 | CentOS 6.3
+14 | CentOS 6.8  
+15 | Fedora 5
+16 | RedHat 5.7 
+17 | BT5-R3  
+18 | MacOS 10.15
+19 | Ubuntu 8
+20 | Ubuntu 18
 
 以上系统测试成功，其它系统未测，若不支持可自行编译<br>
 
@@ -170,3 +227,4 @@ https://github.com/k8gege/LadonGo/releases<br>
 <div style="text-align: center; width: 710px; border: green solid 0px;">
 <img alt="" src="http://k8gege.org/img/k8team.jpg" style="display: inline-block;width: 250px;height: 300px;" />
 </div>
+
