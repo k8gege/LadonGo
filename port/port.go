@@ -8,7 +8,22 @@ import (
 	"fmt"
 	"log"
 	"sync"
+	"time"
+	//"io/ioutil"
+	"bufio"
+	"github.com/k8gege/LadonGo/tcp"
 )
+func IsBanner(address string)(string, error) {
+    conn, err := net.DialTimeout("tcp", address, time.Second*10)
+    if err != nil {
+        return "",err
+    }
+    defer conn.Close()
+    tcpconn := conn.(*net.TCPConn)
+    tcpconn.SetReadDeadline(time.Now().Add(time.Second * 5))
+    reader := bufio.NewReader(conn)
+    return reader.ReadString('\n')
+}
 
 func CheckPort(ip net.IP, port int) {
 	tcpAddr := net.TCPAddr{
@@ -113,7 +128,6 @@ func workerPort(tasks chan Workdist,debugLog *log.Logger){
 }
 
 func ScanPort(host string){
-
 	//Default
 	CheckPort(net.ParseIP(host),21)
 	CheckPort(net.ParseIP(host),22)
@@ -139,10 +153,32 @@ func ScanPort(host string){
 	CheckPort(net.ParseIP(host),8089)
 	CheckPort(net.ParseIP(host),8443)
 	CheckPort(net.ParseIP(host),10000)
+}
+
+func ScanPortBanner(host string){
+
+	tcp.GetBanner(host,21)
+	tcp.GetBanner(host,22)
+	tcp.GetBanner(host,135)
+	tcp.GetBanner(host,139)
+	tcp.GetBanner(host,445)
+	tcp.GetBanner(host,1433)
+	tcp.GetBanner(host,3306)
+	tcp.GetBanner(host,1521)
+	tcp.GetBanner(host,6379)
+	tcp.GetBanner(host,5800)
+	tcp.GetBanner(host,5900)
+	tcp.GetBanner(host,3389)
+	tcp.GetBanner(host,5985)
 	
-	
-	// res,err := CheckPort(host)
-	// if err==nil && res==true {
-		// fmt.Println("PING: "+host)
-	// }
+	tcp.GetBanner(host,80)
+	tcp.GetBanner(host,81)
+	tcp.GetBanner(host,443)
+	tcp.GetBanner(host,7001)
+	tcp.GetBanner(host,7002)
+	tcp.GetBanner(host,8080)
+	tcp.GetBanner(host,8081)
+	tcp.GetBanner(host,8089)
+	tcp.GetBanner(host,8443)
+	tcp.GetBanner(host,10000)
 }

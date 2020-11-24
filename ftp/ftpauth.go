@@ -9,6 +9,7 @@ import (
 	"github.com/k8gege/LadonGo/dic"
 	"github.com/k8gege/LadonGo/logger"
 	"fmt"
+	"strings"
 )
 
 func FtpAuth(ip string, port string, user string, pass string) ( result bool,err error) {
@@ -29,7 +30,7 @@ if err = Lftp.Login(user,pass); err == nil {
 	return result,err
 }
 
-func FtpScan(ScanType string,Target string) {
+func FtpScan2(ScanType string,Target string) {
 	if port.PortCheck(Target,21) {
 		Loop:
 		for _, u := range dic.UserDic() {
@@ -41,6 +42,28 @@ func FtpScan(ScanType string,Target string) {
 					break Loop
 				}
 			}
+		}
+	}
+}
+
+func FtpScan(ScanType string,Target string) {
+	if port.PortCheck(Target,21) {
+		if dic.UserPassIsExist() {
+			Loop:
+			for _, up := range dic.UserPassDic() {
+				s :=strings.Split(up, " ")
+				u := s[0]
+				p := s[1]
+				fmt.Println("Check... "+Target+" "+u+" "+p)
+				res,err := FtpAuth(Target, "21", u, p)
+				if res==true && err==nil {
+					logger.PrintIsok2(ScanType,Target,"21",u, p)
+					break Loop
+				}
+				
+			}
+		} else {
+			FtpScan2(ScanType,Target)	
 		}
 	}
 }

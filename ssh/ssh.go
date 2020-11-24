@@ -167,7 +167,7 @@ func SshAuth(host string, port string, user string, pass string) (result bool,er
 	return result,err
 }
 
-func SshScan(ScanType string,Target string) {
+func SshScan2(ScanType string,Target string) {
 	if port.PortCheck(Target,22) {
 		Loop:
 		for _, u := range dic.UserDic() {
@@ -183,3 +183,24 @@ func SshScan(ScanType string,Target string) {
 	}
 }
 
+func SshScan(ScanType string,Target string) {
+	if port.PortCheck(Target,22) {
+		if dic.UserPassIsExist() {
+			Loop:
+			for _, up := range dic.UserPassDic() {
+				s :=strings.Split(up, " ")
+				u := s[0]
+				p := s[1]
+				fmt.Println("Check... "+Target+" "+u+" "+p)
+				res,err := SshAuth(Target, "22", u, p)
+				if res==true && err==nil {
+					logger.PrintIsok2(ScanType,Target,"22",u, p)
+					break Loop
+				}
+				
+			}
+		} else {
+			SshScan2(ScanType,Target)	
+		}
+	}
+}

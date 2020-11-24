@@ -11,6 +11,7 @@ import (
   "github.com/k8gege/LadonGo/logger"
   "github.com/k8gege/LadonGo/port"
   "github.com/k8gege/LadonGo/dic"
+  "strings"
 )
 
 var help = func () {
@@ -33,7 +34,7 @@ func WinrmAuth(host,user,pass string,port int)(result bool,err error){
 	return result,err
 }
 
-func WinrmScan(ScanType string,Target string) {
+func WinrmScan2(ScanType string,Target string) {
 	if port.PortCheck(Target,5985) {
 		Loop:
 		for _, u := range dic.UserDic() {
@@ -45,6 +46,28 @@ func WinrmScan(ScanType string,Target string) {
 					break Loop
 				}
 			}
+		}
+	}
+}
+
+func WinrmScan(ScanType string,Target string) {
+	if port.PortCheck(Target,5985) {
+		if dic.UserPassIsExist() {
+			Loop:
+			for _, up := range dic.UserPassDic() {
+				s :=strings.Split(up, " ")
+				u := s[0]
+				p := s[1]
+				fmt.Println("Check... "+Target+" "+u+" "+p)
+				res,err := WinrmAuth(Target, u, p,5985)
+				if res==true && err==nil {
+					logger.PrintIsok2(ScanType,Target,"5985",u, p)
+					break Loop
+				}
+				
+			}
+		} else {
+			WinrmScan2(ScanType,Target)	
 		}
 	}
 }

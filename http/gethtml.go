@@ -45,15 +45,22 @@ func GetTitle(html string) string {
 }
 
 func ScanTitle(host string) {
-	url:="http://"+host
-	title:=GetTitle(GetHtml(url))
-	if title!="" {
-		fmt.Println(url+"\t"+title)
-	}
-	url="https://"+host
-	title=GetTitle(GetHtml(url))
-	if title!="" {
-		fmt.Println(url+"\t"+title)
+	if strings.Contains(host, ":") {
+		title:=GetTitle(GetHtml(host))
+		if title!="" {
+			fmt.Println(host+"\t"+title)
+		}
+	} else {
+		url:="http://"+host
+		title:=GetTitle(GetHtml(url))
+		if title!="" {
+			fmt.Println(url+"\t"+title)
+		}
+		url="https://"+host
+		title=GetTitle(GetHtml(url))
+		if title!="" {
+			fmt.Println(url+"\t"+title)
+		}
 	}
 }
 

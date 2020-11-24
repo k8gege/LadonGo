@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 # Ladon Scanner For Golang
 ### Wiki
 http://k8gege.org/Ladon/LadonGo.html<br>
+=======
+# Ladon For Golang
+
+### Wiki
+http://k8gege.org/Ladon/LadonGo.html
+>>>>>>> LadonGo
 
 ### 简介
 LadonGo一款开源渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。2.0版本包含15个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、WinrmScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，BannerScan、HttpTitle、WeblogicScan，端口扫描PortScan。<br>

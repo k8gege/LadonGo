@@ -9,6 +9,7 @@ import (
 	"github.com/k8gege/LadonGo/dic"
 	"github.com/k8gege/LadonGo/logger"
 	"fmt"
+	"strings"
 )
 //Not Support 2003
 func SmbAuth(ip string, port string, username string, password string) ( result bool,err error) {
@@ -33,7 +34,7 @@ func SmbAuth(ip string, port string, username string, password string) ( result 
 	return result,err
 }
 
-func SmbScan(ScanType string,Target string) {
+func SmbScan2(ScanType string,Target string) {
 	if port.PortCheck(Target,445) {
 		Loop:
 		for _, u := range dic.UserDic() {
@@ -45,6 +46,28 @@ func SmbScan(ScanType string,Target string) {
 					break Loop
 				}
 			}
+		}
+	}
+}
+
+func SmbScan(ScanType string,Target string) {
+	if port.PortCheck(Target,445) {
+		if dic.UserPassIsExist() {
+			Loop:
+			for _, up := range dic.UserPassDic() {
+				s :=strings.Split(up, " ")
+				u := s[0]
+				p := s[1]
+				fmt.Println("Check... "+Target+" "+u+" "+p)
+				res,err := SmbAuth(Target, "445", u, p)
+				if res==true && err==nil {
+					logger.PrintIsok(ScanType,Target,u, p)
+					break Loop
+				}
+				
+			}
+		} else {
+			SmbScan2(ScanType,Target)	
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package mysql
+package mssql
 //Ladon Scanner for golang 
 //Author: k8gege
 //K8Blog: http://k8gege.org/Ladon
@@ -9,30 +9,34 @@ import (
 	"github.com/k8gege/LadonGo/logger"
 	"fmt"
 	"database/sql"
-	_"github.com/Go-SQL-Driver/MySQL"
+	_"github.com/denisenkom/go-mssqldb"
 	"strings"
 )
 
-func MysqlAuth(ip string, port string, user string, pass string) ( result bool,err error) {
+func MssqlAuth(ip ,port,user ,pass string) ( result bool,err error) {
 	result = false
-    db, err := sql.Open("mysql", user+":"+pass+"@tcp("+ip+":"+port+")/mysql?charset=utf8")
-    if err != nil {
-    }
-	if db.Ping()==nil {
-		result = true
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%s;encrypt=disable", ip, user, pass, port)
+	db, err := sql.Open("mssql", connString)
+	if err == nil {
+		defer db.Close()
+		err = db.Ping()
+		if err == nil {
+			result = true
+		 }
 	}
+	
 	return result,err
 }
 
-func MysqlScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,3306) {
+func MssqlScan2(ScanType string,Target string) {
+	if port.PortCheck(Target,1433) {
 		Loop:
 		for _, u := range dic.UserDic() {
 			for _, p := range dic.PassDic() {
 				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := MysqlAuth(Target, "3306", u, p)
+				res,err := MssqlAuth(Target, "1433", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"3306",u, p)
+					logger.PrintIsok2(ScanType,Target,"1433",u, p)
 					break Loop
 				}
 			}
@@ -40,8 +44,8 @@ func MysqlScan2(ScanType string,Target string) {
 	}
 }
 
-func MysqlScan(ScanType string,Target string) {
-	if port.PortCheck(Target,3306) {
+func MssqlScan(ScanType string,Target string) {
+	if port.PortCheck(Target,1433) {
 		if dic.UserPassIsExist() {
 			Loop:
 			for _, up := range dic.UserPassDic() {
@@ -49,15 +53,15 @@ func MysqlScan(ScanType string,Target string) {
 				u := s[0]
 				p := s[1]
 				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := MysqlAuth(Target, "3306", u, p)
+				res,err := MssqlAuth(Target, "1433", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"3306",u, p)
+					logger.PrintIsok2(ScanType,Target,"1433",u, p)
 					break Loop
 				}
 				
 			}
 		} else {
-			MysqlScan2(ScanType,Target)	
+			MssqlScan2(ScanType,Target)	
 		}
 	}
 }
