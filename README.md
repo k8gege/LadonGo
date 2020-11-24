@@ -65,9 +65,6 @@ WinrmCmd |         (Winrm Remote command execution Default 5985 Port)
 -|-
 PhpStudyDoor |     (PhpStudy 2016 & 2018 BackDoor Exploit)
 
-
-![image](http://k8gege.org/k8img/LadonGo/Help.PNG)
-
 ### 源码编译
 ```Bash
 go get github.com/k8gege/LadonGo
@@ -170,7 +167,22 @@ Ladon WinrmCmd host port user pass cmd
 ### 扫描速度
 1.和Ladon一样，ICMP探测C段仅需1秒<br>
 2.Ping扫描C段大约11秒，支持任意权限<br>
-3.其它模块自行测试<br>
+3.其它模块，欢迎大家反馈<br>
+
+#### 扫C段(192.168.1/c)
+ICMP 仅3ms  1/20秒 <br>
+WebTitle 10毫秒 1/6秒<br>
+T3Scan 约15毫秒 1/4秒<br>
+EthScan 2ms  1/30秒<br>
+
+#### 扫B段(192.168/b)
+EthScan   23分钟  1个端口<br>
+T3Scan     1小时   4个端口<br>
+WebTitle  40分钟  1个端口<br>
+MS17010  12分钟  1个端口<br>
+Snmp      20分钟 1个端口<br>
+
+PS：扫描速度实际上和Ladon .net版速度也差不多，只是没专门记录，因为重写测试过程中顺便记录一下GO版速度
 
 ### 跨平台/全平台/全系统
 
