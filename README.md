@@ -167,10 +167,10 @@ Ladon WinrmCmd host port user pass cmd
 #### 扫C段(192.168.1/c)
  . | . | . 
 -|-|-
-ICMP |仅3ms  |1/20秒
+ICMP |3毫秒  |1/20秒
 WebTitle| 10毫秒| 1/6秒
-T3Scan |约15毫秒| 1/4秒
-EthScan |2ms | 1/30秒
+T3Scan |15毫秒| 1/4秒
+EthScan |2毫秒 | 1/30秒
 
 #### 扫B段(192.168/b)
  . | . | . 
