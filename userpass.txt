@@ -3,6 +3,9 @@ root aaaa
 root root
 system k8gege520
 root k8gege
+root k8 orcl
+system k8ge3ge orcl
+1521 system k8gege orcl
 root k8team
 admin admin
 root toor

@@ -14,24 +14,17 @@ import (
 	"strconv"
 )
 
-func PortCheck(host string, port int)(result bool) {
-	result = false
-	ip := net.ParseIP(host)
-	tcpAddr := net.TCPAddr{
-		IP:   ip,
-		Port: port,
+func PortCheck(host string, port int)(bool) {
+    p := strconv.Itoa(port)
+    conn, err := net.DialTimeout("tcp", host+":"+p, time.Second*5)
+    if err != nil {
+        //fmt.Println(host,p,"Close")
+	return false
+    } else {
+	fmt.Println(host,p,"Open")
+	conn.Close()
+	return false
 	}
-	conn, err := net.DialTCP("tcp", nil, &tcpAddr)
-	if conn !=nil{
-		fmt.Println(tcpAddr.IP,tcpAddr.Port,"Open")
-		conn.Close()
-		result = true
-	}
-	if err != nil {
-	//	fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
-	//	fmt.Println(err)
-	}
-	return result
 }
 
 // 假定是 SSH 服务。

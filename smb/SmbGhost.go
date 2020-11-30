@@ -10,7 +10,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"runtime"
+	//"runtime"
+	"github.com/k8gege/LadonGo/logger"
 )
 
 const (
@@ -117,14 +118,15 @@ func SmbGhost(ip string, port int) {
 		err = conn.SetReadDeadline(time.Now().Add(2 * time.Second))
 		n, err := conn.Read(buff)
 		if err != nil {
-			fmt.Println(err.Error()) // Profound analysis
+			//fmt.Println(err.Error()) // Profound analysis
 		}
 
 		if bytes.Contains([]byte(buff[:n]), []byte("Public")) == true {
-			if runtime.GOOS=="windows" {
-				fmt.Println(ip + " CVE-2020-0796 SmbGhost Vulnerable")
-			} else
-			{fmt.Println("\033[35m"+ip + " CVE-2020-0796 SmbGhost Vulnerable"+"\033[0m")}
+			//if runtime.GOOS=="windows" {
+			//	fmt.Println(ip + " CVE-2020-0796 SmbGhost Vulnerable")
+			//} else
+			//{fmt.Println("\033[35m"+ip + " CVE-2020-0796 SmbGhost Vulnerable"+"\033[0m")}
+			logger.PrintVul(ip + " CVE-2020-0796 SmbGhost Vulnerable")
 		} else {
 			//fmt.Println(ip + " Not Vulnerable")
 			fmt.Println(ip)

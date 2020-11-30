@@ -12,7 +12,8 @@ import (
 	//"sync"
 	"time"
 	"strings"
-	"runtime"
+	//"runtime"
+	"github.com/k8gege/LadonGo/logger"
 )
 
 var (
@@ -101,9 +102,10 @@ func MS17010(ip string, timeout time.Duration) {
 
 	if reply[9] == 0x05 && reply[10] == 0x02 && reply[11] == 0x00 && reply[12] == 0xc0 {
 		//fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
-		if runtime.GOOS=="windows" {fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
-		} else{fmt.Printf("\033[33m%s\tMS17-010\t(%s)\033[0m\n", ip, os)}
-
+		//if runtime.GOOS=="windows" {fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
+		//} else{fmt.Printf("\033[33m%s\tMS17-010\t(%s)\033[0m\n", ip, os)}
+		//color.Magenta("%s\tMS17-010\t(%s)\n", ip, os)
+		logger.PrintVul(ip+"\tMS17-010\t"+os+"\n")
 		// detect present of DOUBLEPULSAR SMB implant
 		trans2SessionSetupRequest[28] = treeID[0]
 		trans2SessionSetupRequest[29] = treeID[1]

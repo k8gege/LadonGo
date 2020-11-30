@@ -14,6 +14,7 @@ import (
 	"github.com/k8gege/LadonGo/tcp"
 )
 func IsBanner(address string)(string, error) {
+
     conn, err := net.DialTimeout("tcp", address, time.Second*10)
     if err != nil {
         return "",err
@@ -36,7 +37,7 @@ func CheckPort(ip net.IP, port int) {
 		conn.Close()
 	}
 	if err != nil {
-	//	fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
+		//fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
 	//	fmt.Println(err)
 	}
 }
@@ -55,7 +56,7 @@ func PortCheck(host string, port int)(result bool) {
 		result = true
 	}
 	if err != nil {
-	//	fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
+		//fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
 	//	fmt.Println(err)
 	}
 	return result
@@ -73,7 +74,7 @@ func PortIsOpen(ip net.IP, port int) ( result bool,err error) {
 		result = true
 	}
 	if err != nil {
-	//	fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
+		//fmt.Println(tcpAddr.IP,tcpAddr.Port,"Close")
 	//	fmt.Println(err)
 	}
 	return result,err
@@ -115,70 +116,27 @@ func workerPort(tasks chan Workdist,debugLog *log.Logger){
 		return
 	}
 	host := task.Host
-	//fmt.Println("Ping: "+host)
-	
+
 	//Default
 	ScanPort(host)
-	
-	
-	// res,err := CheckPort(host)
-	// if err==nil && res==true {
-		// fmt.Println("PING: "+host)
-	// }
+
 }
 
+var DefaultPorts = []int{21,22,23,25,80,443,8080,110,135,139,445,389,489,587,1433,1434,1521,1522,1723,2121,3306,3389,4899,5631,5632,5800,5900,7071,43958,65500,4444,8888,6789,4848,5985,5986,8081,8089,8443,10000,6379,7001,7002}
+      
 func ScanPort(host string){
-	//Default
-	CheckPort(net.ParseIP(host),21)
-	CheckPort(net.ParseIP(host),22)
-	CheckPort(net.ParseIP(host),135)
-	CheckPort(net.ParseIP(host),139)
-	CheckPort(net.ParseIP(host),445)
-	CheckPort(net.ParseIP(host),1433)
-	CheckPort(net.ParseIP(host),3306)
-	CheckPort(net.ParseIP(host),1521)
-	CheckPort(net.ParseIP(host),6379)
-	CheckPort(net.ParseIP(host),5800)
-	CheckPort(net.ParseIP(host),5900)
-	CheckPort(net.ParseIP(host),3389)
-	CheckPort(net.ParseIP(host),5985)
-	
-	CheckPort(net.ParseIP(host),80)
-	CheckPort(net.ParseIP(host),81)
-	CheckPort(net.ParseIP(host),443)
-	CheckPort(net.ParseIP(host),7001)
-	CheckPort(net.ParseIP(host),7002)
-	CheckPort(net.ParseIP(host),8080)
-	CheckPort(net.ParseIP(host),8081)
-	CheckPort(net.ParseIP(host),8089)
-	CheckPort(net.ParseIP(host),8443)
-	CheckPort(net.ParseIP(host),10000)
+var wg sync.WaitGroup
+for _, p:= range DefaultPorts {
+wg.Add(1)
+//CheckPort(net.ParseIP(host),p)
+tcp.PortCheck(host,p)
+defer wg.Done()
+}
+wg.Wait()
 }
 
-func ScanPortBanner(host string){
-
-	tcp.GetBanner(host,21)
-	tcp.GetBanner(host,22)
-	tcp.GetBanner(host,135)
-	tcp.GetBanner(host,139)
-	tcp.GetBanner(host,445)
-	tcp.GetBanner(host,1433)
-	tcp.GetBanner(host,3306)
-	tcp.GetBanner(host,1521)
-	tcp.GetBanner(host,6379)
-	tcp.GetBanner(host,5800)
-	tcp.GetBanner(host,5900)
-	tcp.GetBanner(host,3389)
-	tcp.GetBanner(host,5985)
-	
-	tcp.GetBanner(host,80)
-	tcp.GetBanner(host,81)
-	tcp.GetBanner(host,443)
-	tcp.GetBanner(host,7001)
-	tcp.GetBanner(host,7002)
-	tcp.GetBanner(host,8080)
-	tcp.GetBanner(host,8081)
-	tcp.GetBanner(host,8089)
-	tcp.GetBanner(host,8443)
-	tcp.GetBanner(host,10000)
+func ScanPortBanner(host string){	
+for _, p:= range DefaultPorts {
+tcp.GetBanner(host,p)
+}
 }
