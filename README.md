@@ -4,12 +4,12 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 ### 简介
-LadonGo一款开源网络渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.0版本包含23个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别PingScan、IcmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan。<br>
+LadonGo一款开源网络渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.1版本包含24个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan、服务探测PortScanBanner。<br>
 
 ### 开发环境
-OS: Kali 2019<br>
-IDE: Mousepad<br>
-Go:  1.13<br>
+OS: Kali 2019 X64<br>
+IDE: 记事本Mousepad<br>
+Go:  1.13 Linux<br>
 
 ### 功能模块
 
@@ -17,6 +17,7 @@ Go:  1.13<br>
 
  . | . 
 -|-
+OnlinePC |         (Using ICMP/SNMP/Ping detect Online hosts)
 PingScan |         (Using system ping to detect Online hosts)
 IcmpScan |         (Using ICMP Protocol to detect Online hosts)
 SnmpScan |         (Using Snmp Protocol to detect Online hosts)
