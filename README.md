@@ -221,7 +221,7 @@ ID | OS
 ![image](http://k8gege.org/k8img/LadonGo/LnxMS17010.PNG)
 
 #### Windows
-![image](http://k8gege.org/k8img/LadonGo/WinMS17010.PNG)
+![image](http://k8gege.org/k8img/LadonGo/OxidScan.PNG)
 
 
 ### Download
