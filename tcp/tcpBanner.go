@@ -12,6 +12,8 @@ import (
     "sync"
     "time"
 	"strconv"
+	"strings"
+	"github.com/k8gege/LadonGo/logger"
 )
 
 func PortCheck(host string, port int)(bool) {
@@ -106,3 +108,35 @@ func GetBanner(address string,port int) {
 		}
 	}
 }
+
+func TcpBanner(host,port string) {
+	var banner string
+	conn, err := net.DialTimeout("tcp", host+":"+port, time.Second * 8)
+	if err == nil {	
+	fmt.Fprintf(conn, "\r\n\r\n")
+	conn.SetReadDeadline(time.Now().Add(time.Second * 8))
+	buff := make([]byte, 1024)
+	n, _ := conn.Read(buff)
+	banner=string(buff[:n])
+	if banner==""{
+	fmt.Fprintf(conn, "GET / HTTP/1.1\r\n\r\n")
+	conn.SetReadDeadline(time.Now().Add(time.Second * 8))
+	buff := make([]byte, 1024)
+	n, _ := conn.Read(buff)
+	banner=string(buff[:n])
+	}
+	banner =strings.Replace(banner,"\r\n"," ",-1)
+	
+	if strings.Contains(banner, "SSH-") {
+	logger.PrintMagenta(host+" "+port+" Open "+banner)
+	} else if strings.Contains(banner, "HTTP/1") {
+	logger.PrintYellow(host+" "+port+" Open "+banner)
+	} else if strings.Contains(banner, "FTP") {
+	logger.PrintBlue(host+" "+port+" Open "+banner)
+	} else {
+	fmt.Println(host,port,"Open",banner)
+	}
+
+	}
+}
+

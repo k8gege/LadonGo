@@ -4,7 +4,7 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 ### 简介
-LadonGo一款开源网络渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.1版本包含24个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan、服务探测PortScanBanner。<br>
+LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.2版本包含24个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan、服务探测PortScanBanner。<br>
 
 ### 开发环境
 OS: Kali 2019 X64<br>
@@ -89,14 +89,16 @@ Ladon Example
 Ladon IP/机器名/CIDR/URL/txt 扫描模块
 
 ```Bash
-Ladon 192.168.1.8/24 MS17010
-Ladon 192.168.1/c MS17010
-Ladon 192.168/b MS17010
-Ladon 192/a MS17010
-Ladon 192.168.1-192.168.5 MS17010
-Ladon http://192.168.1.8:8080 BasicAuthScan
-Ladon ip.txt MS17010
-Ladon url.txt HttpBanner
+IP Ladon 192.168.1.8 MS17010
+C段 Ladon 192.168.1.8/24 MS17010
+C段 Ladon 192.168.1/c MS17010
+B段 Ladon 192.168/b MS17010
+A段 Ladon 192/a MS17010
+
+C段(1-5) Ladon 192.168.1-192.168.5 MS17010
+URL Ladon http://192.168.1.8:8080 BasicAuthScan
+IP列表  Ladon ip.txt MS17010
+URL列表 Ladon url.txt HttpBanner
 ```
 
 #### 例子

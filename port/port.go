@@ -10,7 +10,10 @@ import (
 	"sync"
 	"time"
 	//"io/ioutil"
+	"strconv"
+	"os"
 	"bufio"
+	"strings"
 	"github.com/k8gege/LadonGo/tcp"
 )
 func IsBanner(address string)(string, error) {
@@ -42,6 +45,20 @@ func CheckPort(ip net.IP, port int) {
 	}
 }
 
+func TxtWrite(text string){
+    f,err := os.Create("port.log")
+    defer f.Close()
+    if err !=nil {
+        fmt.Println(err.Error())
+    } else {
+        _,err=f.Write([]byte(text))
+	//_,err=f.Write(text)
+        if err !=nil {
+        fmt.Println(err.Error())
+    	}
+    }
+}
+
 func PortCheck(host string, port int)(result bool) {
 	result = false
 	ip := net.ParseIP(host)
@@ -52,6 +69,8 @@ func PortCheck(host string, port int)(result bool) {
 	conn, err := net.DialTCP("tcp", nil, &tcpAddr)
 	if conn !=nil{
 		fmt.Println(tcpAddr.IP,tcpAddr.Port,"Open")
+		//TxtWrite(tcpAddr.IP.String()+"\t"+tcpAddr.Port.String()+"\tOpen")
+		TxtWrite(host+"\t"+strconv.Itoa(port)+" Open")
 		conn.Close()
 		result = true
 	}
@@ -137,6 +156,30 @@ wg.Wait()
 
 func ScanPortBanner(host string){	
 for _, p:= range DefaultPorts {
-tcp.GetBanner(host,p)
+tcp.TcpBanner(host,strconv.Itoa(p))
+}
+}
+
+func ScanPorts(host,ports string){
+var wg sync.WaitGroup
+for _, port:= range strings.Split(ports,",") {
+wg.Add(1)
+//CheckPort(net.ParseIP(host),p)
+p, err := strconv.Atoi(port)
+if err !=nil{
+}
+tcp.PortCheck(host,p)
+defer wg.Done()
+}
+wg.Wait()
+}
+
+func ScanPortBanners(host,ports string){	
+for _, port:= range strings.Split(ports,",")  {
+//p, err := strconv.Atoi(port)
+//if err !=nil{
+//}
+//tcp.GetBanner(host,p)
+tcp.TcpBanner(host,port)
 }
 }

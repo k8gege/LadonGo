@@ -58,7 +58,11 @@ func Icmp(host string,Log *log.Logger) {
 		fmt.Println("ICMP: ",host)
 	}
 }
-
+func Online(host string) {
+if IcmpOK(host) {
+fmt.Println("ICMP: "+host)
+}
+}
 func IcmpOK(host string)(isok bool) {
 	var size int
 	var timeout int64

@@ -166,13 +166,15 @@ func GetUser(){
 
 }
 var debugLog *log.Logger
+var scanports string
 func main() {
-	color.Green("LadonGo 3.1 by k8gege")
+	color.Green("LadonGo 3.2 by k8gege")
 	fmt.Println("Arch: "+runtime.GOARCH+" OS: "+runtime.GOOS)
 	if icmp.IcmpOK("localhost") {
 	isicmp=true}
 	GetUser()	
 	fmt.Println("Pid: ",os.Getpid(),"Process:",path.Base(os.Args[0]))
+	scanports=""
 	ParLen := len(os.Args)
 	if ParLen==1 {
 		help()
@@ -234,8 +236,20 @@ func main() {
 		fmt.Println(SecPar,"Moudle Not Found")
 		os.Exit(0)
 	}
-	
-	if ParLen>4 {
+
+	EndPar := os.Args[ParLen-1]
+	Target := os.Args[ParLen-2]
+
+	if ParLen==4 {
+		ThirdPar := strings.ToUpper(os.Args[2])	
+		fmt.Println("Load "+ThirdPar)
+		if ThirdPar == "PORTSCAN" || ThirdPar == "SCANPORT"|| ThirdPar == "TCPSCAN" || ThirdPar == "TCPBANNER"|| ThirdPar == "PORTSCANBNNER" || ThirdPar == "SCANPORTBANNER"  {
+			EndPar = ThirdPar
+			Target = os.Args[1]
+			scanports = strings.ToUpper(os.Args[3])
+			fmt.Println("port "+scanports)
+		}
+	} else if ParLen>4 {
 		SecPar := strings.ToUpper(os.Args[1])
 		fmt.Println("Load "+SecPar)
 		if SecPar == "WINRMCMD" || SecPar == "WINRMEXEC" || SecPar == "WINRMSHELL"{
@@ -246,9 +260,9 @@ func main() {
 			ssh.ExecCmd(os.Args[2],os.Args[3],os.Args[4],os.Args[5],os.Args[6])
 			os.Exit(0)
 		}
-	}
-	
-	if ParLen>3 {
+		
+
+	}else if ParLen>3 {
 		SecPar := strings.ToUpper(os.Args[1])
 		fmt.Println("Load "+SecPar)
 		if SecPar == "PHPSTUDYDOOR" || SecPar == "PHPSTUDYBACKDOOR" ||SecPar == "PHPSTUDYRCE"||SecPar == "PHPSTUDYEXP" {
@@ -257,11 +271,12 @@ func main() {
 		}
 	}
 	
-	EndPar := os.Args[ParLen-1]
-	Target := os.Args[ParLen-2]
-
+	//EndPar := os.Args[ParLen-1]
+	//Target := os.Args[ParLen-2]
 	fmt.Println("Targe: "+Target)
-	fmt.Println("Load "+EndPar)
+	if ParLen==3 {	
+		fmt.Println("Load "+EndPar)
+	}
 	//log.Println("Start...")
 	fmt.Println("\nScanStart: "+time.Now().Format("2006-01-02 03:04:05"))	
 	ScanType := strings.ToUpper(EndPar)
@@ -327,6 +342,7 @@ func main() {
 	} else {
 		LadonScan(ScanType,Target)
 	}
+
 	//log.Println("Finished")	
 	fmt.Println(" Finished: "+time.Now().Format("2006-01-02 03:04:05"))
 }
@@ -377,11 +393,13 @@ func AScan(ScanType string,Target string){
 		BScan(ScanType,ip)
 	}
 }
+
 func LadonScan(ScanType string,Target string) {
 	if ScanType == "PINGSCAN" ||ScanType == "PING" {
 		ping.PingName(Target)
 	} else if ScanType == "ICMPSCAN" ||ScanType == "ICMP" {
-		icmp.Icmp(Target,debugLog)
+		//icmp.Icmp(Target,debugLog)
+		icmp.Online(Target)
 	} else if ScanType == "SNMPSCAN" ||ScanType == "SNMP" {
 		snmp.GetInfo(Target)
 	} else if ScanType == "ONLINEPC"{
@@ -392,20 +410,53 @@ func LadonScan(ScanType string,Target string) {
 		}
 		snmp.SnmpOK(Target)
 	} else if ScanType == "PORTSCAN" || ScanType == "SCANPORT"|| ScanType == "TCPSCAN" {
-		if isicmp {
+		//Only Scan Port
+		/*if isicmp {
 		if icmp.IcmpOK(Target) {
-			port.ScanPort(Target)
+			if strings.Contains(scanports, ",") {
+				port.ScanPorts(Target,scanports)
+			} else {
+				port.ScanPort(Target)
+			}
 		} 
 		}else if ping.PingOK(Target) {
-			port.ScanPort(Target)
+			if strings.Contains(scanports, ",") {
+				port.ScanPorts(Target,scanports)
+			} else {
+				port.ScanPort(Target)
+			}
+		}*/
+		//Scan Port & Banner
+		if isicmp {
+		if icmp.IcmpOK(Target) {
+			if strings.Contains(scanports, ",") {
+				port.ScanPortBanners(Target,scanports)
+			} else {
+				port.ScanPortBanner(Target)
+			}
+		} 
+		}else if ping.PingOK(Target) {
+			if strings.Contains(scanports, ",") {
+				port.ScanPortBanners(Target,scanports)
+			} else {
+				port.ScanPortBanner(Target)
+			}
 		}
 	} else if ScanType == "TCPBANNER"|| ScanType == "PORTSCANBNNER" || ScanType == "SCANPORTBANNER"  {		
 		if isicmp {
 		if icmp.IcmpOK(Target) {
-			port.ScanPortBanner(Target)
+			if strings.Contains(scanports, ",") {
+				port.ScanPortBanners(Target,scanports)
+			} else {
+				port.ScanPortBanner(Target)
+			}
 		} 
 		}else if ping.PingOK(Target) {
-			port.ScanPortBanner(Target)
+			if strings.Contains(scanports, ",") {
+				port.ScanPortBanners(Target,scanports)
+			} else {
+				port.ScanPortBanner(Target)
+			}
 		}
 	} else if ScanType == "HTTPBANNER" ||ScanType == "WEBBANNER" {
 		http.HttpBanner(Target)

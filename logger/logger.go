@@ -11,6 +11,18 @@ import (
 	"github.com/fatih/color"
 )
 
+func PrintBlue(str string){
+	color.Blue(str)
+}
+func PrintYellow(str string){
+	color.Yellow(str)
+}
+func PrintRed(str string){
+	color.Red(str)
+}
+func PrintMagenta(str string){
+	color.Magenta(str)
+}
 func PrintVul(str string){
 	color.Magenta(str)
 }
