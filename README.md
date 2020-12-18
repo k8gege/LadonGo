@@ -230,6 +230,7 @@ ID | OS
 
 #### LadonGo (ALL OS)
 https://github.com/k8gege/LadonGo/releases<br>
+http://k8gege.org/Download/LadonGo.rar
 
 #### Ladon (Windows & Cobalt Strike)
 
