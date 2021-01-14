@@ -141,7 +141,7 @@ func workerPort(tasks chan Workdist,debugLog *log.Logger){
 
 }
 
-var DefaultPorts = []int{21,22,23,25,80,443,8080,110,135,139,445,389,489,587,1433,1434,1521,1522,1723,2121,3306,3389,4899,5631,5632,5800,5900,7071,43958,65500,4444,8888,6789,4848,5985,5986,8081,8089,8443,10000,6379,7001,7002}
+var DefaultPorts = []int{21,22,23,25,80,443,8080,110,135,139,445,389,489,587,1433,1434,1521,1522,1723,2121,3000,3306,3389,4899,5631,5632,5800,5900,7071,43958,65500,4444,8888,6789,4848,5985,5986,8081,8089,8443,10000,6379,7001,7002}
       
 func ScanPort(host string){
 var wg sync.WaitGroup
@@ -182,4 +182,19 @@ for _, port:= range strings.Split(ports,",")  {
 //tcp.GetBanner(host,p)
 tcp.TcpBanner(host,port)
 }
+}
+
+func ScanPortBannerSingle(host,port string){	
+tcp.TcpBanner(host,port)
+}
+
+func ScanPortBannerRange(host,ports string){	
+port:=strings.Split(ports,"-") 
+p1, _ := strconv.Atoi(port[0])
+p2, _ := strconv.Atoi(port[1])
+
+for i := p1; i <= p2; i++ {
+    tcp.TcpBanner(host,strconv.Itoa(i))
+}
+
 }

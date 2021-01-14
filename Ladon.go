@@ -25,6 +25,7 @@ import (
 	"github.com/k8gege/LadonGo/exp"
 	"github.com/k8gege/LadonGo/dic"
 	//"github.com/k8gege/LadonGo/tcp"
+	"github.com/k8gege/LadonGo/redis"
 	"github.com/fatih/color"
 	"strings"
 	"log"
@@ -141,8 +142,18 @@ func Exploit() {
 
 }
 
-var isicmp bool
+func Noping() {
+	s:=""
+	if runtime.GOOS!="windows" {
+		s="./"
+	}
+	fmt.Println("\nNoping Example:")
+	fmt.Println(s+"Ladon noping 192.168.1.8 PortScan")
+	fmt.Println(s+"Ladon noping ip.txt PortScan")
+}
 
+var isicmp bool
+var ver="3.3"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -168,7 +179,7 @@ func GetUser(){
 var debugLog *log.Logger
 var scanports string
 func main() {
-	color.Green("LadonGo 3.2 by k8gege")
+	color.Green("LadonGo "+ver+" by k8gege")
 	fmt.Println("Arch: "+runtime.GOARCH+" OS: "+runtime.GOOS)
 	if icmp.IcmpOK("localhost") {
 	isicmp=true}
@@ -195,6 +206,10 @@ func main() {
 		}
 		if SecPar=="HELPLIST"||SecPar=="FUNCLIST" {
 			FuncList()
+			os.Exit(0)
+		}
+		if SecPar=="NOPING"{
+			Noping()
 			os.Exit(0)
 		}
 		if SecPar=="BRUTEFOR"||SecPar=="BRUTE"||SecPar=="BRUTEFORCE"||SecPar=="BRUTE-FORCE"  {
@@ -376,7 +391,7 @@ func BScan(ScanType string,Target string){
 	ip = strings.Replace(ip, "/B", "", -1)
 	ips := strings.Split(ip,".")
 	ip = ips[0]+"."+ips[1]
-	for i:=1;i<256;i++ {
+	for i:=0;i<256;i++ {
 		ip:=fmt.Sprintf("%s.%d",ip,i)
 		fmt.Println("\nC_Segment: "+ip)
 		fmt.Println("=============================================")
@@ -388,7 +403,7 @@ func AScan(ScanType string,Target string){
 	ip = strings.Replace(ip, "/A", "", -1)
 	ips := strings.Split(ip,".")
 	ip = ips[0]
-	for i:=1;i<256;i++ {
+	for i:=0;i<256;i++ {
 		ip:=fmt.Sprintf("%s.%d",ip,i)
 		BScan(ScanType,ip)
 	}
@@ -431,6 +446,10 @@ func LadonScan(ScanType string,Target string) {
 		if icmp.IcmpOK(Target) {
 			if strings.Contains(scanports, ",") {
 				port.ScanPortBanners(Target,scanports)
+			} else if strings.Contains(scanports, "-") {
+				port.ScanPortBannerRange(Target,scanports)
+			} else if scanports!="" {
+				port.ScanPortBannerSingle(Target,scanports)
 			} else {
 				port.ScanPortBanner(Target)
 			}
@@ -438,6 +457,10 @@ func LadonScan(ScanType string,Target string) {
 		}else if ping.PingOK(Target) {
 			if strings.Contains(scanports, ",") {
 				port.ScanPortBanners(Target,scanports)
+			} else if strings.Contains(scanports, "-") {
+				port.ScanPortBannerRange(Target,scanports)
+			} else if scanports!="" {
+				port.ScanPortBannerSingle(Target,scanports)
 			} else {
 				port.ScanPortBanner(Target)
 			}
@@ -486,6 +509,8 @@ func LadonScan(ScanType string,Target string) {
 		oracle.SqlPlusScan(ScanType,Target)
 	} else if ScanType == "WINRMSCAN" {
 		winrm.WinrmScan(ScanType,Target)
+	} else if ScanType == "REDISSCAN" {
+		redis.RedisNullScan(ScanType,Target)
 	} else if ScanType == "HTTPBASICSCAN" ||ScanType == "BASICAUTHSCAN" ||ScanType == "401SCAN"  {
 		http.BasicAuthScan(ScanType,"http://"+Target)
 	} else {

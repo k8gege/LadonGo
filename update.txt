@@ -1,0 +1,22 @@
+3.3 2021.01.14
+[u] 修复无权限写文件时，结束密码爆破的BUG
+[u] 修复B段、A段漏扫0段的BUG
+[u] PortScan  增加Ruby on Rails默认WEB端口3000
+[+] RedisScan Redis未授权访问扫描
+[u] TcpBanner 范围端口 例子: Ladon ip/24 TcpBanner 80-89
+[u] PortScan  范围端口 例子: Ladon ip/24 PortScan 80-89
+[u] TcpBanner 指定端口 例子: Ladon ip/24 TcpBanner 80
+[u] PortScan  指定端口 例子: Ladon ip/24 PortScan 80
+
+3.2 2020.12.18
+[u] PortScan默认扫Banner 高亮显示SSH、HTTP、FTP服务
+[+] TcpBanner 自定义端口 例子: Ladon ip/24 TcpBanner 80,135,445
+[+] PortScan 自定义端口  例子: Ladon ip/24 PortScan 80,135,445
+[u] 修复ICMP误报的问题(icmp_seq=1 Destination Host Unreachable)
+
+#### TcpBanner
+ScanStart: 2020-12-18 02:30:33
+192.168.1.19 22 Open SSH-2.0-OpenSSH_5.1 
+192.168.1.145 22 Open SSH-2.0-OpenSSH_5.1 
+192.168.1.1 21 Open 220 Welcome to virtual FTP service.
+192.168.1.1 80 Open HTTP/1.1 200 OK Connection: Keep-Alive 
