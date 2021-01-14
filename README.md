@@ -4,7 +4,7 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 ### 简介
-LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.2版本包含24个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，密码爆破SmbScan、SshScan、FtpScan、MysqlScan、MssqlScan、OracleScan、SqlplusScan、WinrmScan、HttpBasicScan，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描PortScan、服务探测PortScanBanner。<br>
+LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.3版本包含25个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd，10种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
 
 ### 开发环境
 OS: Kali 2019 X64<br>
@@ -50,7 +50,7 @@ MssqlScan |        (Using Mssql Protocol to Brute-For 1433 Port)
 OracleScan |       (Using Oracle Protocol to Brute-For 1521 Port)
 WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port)
 SqlplusScan |      (Using Oracle Sqlplus Brute-For 1521 Port)
-
+RedisScan |      (Using Redis Protocol to Brute-For 6379 Port)
 
 #### RemoteExec
 
@@ -158,6 +158,9 @@ Ladon 192.168.1.8/24 SqlplusScan<br>
 扫描C段5985端口Winrm服务器弱口令<br>
 Ladon 192.168.1.8/24 WinrmScan<br>
 
+扫描C段6379端口Redis服务器空口令<br>
+Ladon 192.168.1.8/24 RScan<br>
+
 ##### 远程命令执行
 
 ```Bash
@@ -236,7 +239,7 @@ http://k8gege.org/Download/LadonGo.rar
 
 历史版本: https://github.com/k8gege/Ladon/releases<br>
 7.0版本：http://k8gege.org/Download<br>
-7.5版本：K8小密圈<br>
+7.8版本：K8小密圈<br>
 
 
 <div style="text-align: center; width: 710px; border: green solid 0px;">
