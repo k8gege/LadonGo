@@ -159,7 +159,7 @@ Ladon 192.168.1.8/24 SqlplusScan<br>
 Ladon 192.168.1.8/24 WinrmScan<br>
 
 扫描C段6379端口Redis服务器空口令<br>
-Ladon 192.168.1.8/24 RScan<br>
+Ladon 192.168.1.8/24 RedisScan<br>
 
 ##### 远程命令执行
 
