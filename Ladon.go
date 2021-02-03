@@ -51,7 +51,7 @@ func help() {
 	fmt.Println(s+"Ladon FuncList")
 	fmt.Println(s+"Ladon Detection")
 	fmt.Println(s+"Ladon VulDetection")
-	fmt.Println(s+"adon BruteFor")
+	fmt.Println(s+"Ladon BruteFor")
 	fmt.Println(s+"Ladon RemoteExec")
 	fmt.Println(s+"Ladon Exploit")
 	fmt.Println(s+"Ladon Example")
@@ -132,6 +132,7 @@ func RemoteExec() {
 	color.Magenta("\nRemoteExec:")
 	fmt.Println("SshCmd   \t(SSH Remote command execution Default 22 Port)")
 	fmt.Println("WinrmCmd \t(Winrm Remote command execution Default 5985 Port)")
+	fmt.Println("PhpShell \t(PHP Shell Remote command execution Default 80 Port)")
 }
 
 func Exploit() {
@@ -153,7 +154,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.3"
+var ver="3.4"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -179,7 +180,7 @@ func GetUser(){
 var debugLog *log.Logger
 var scanports string
 func main() {
-	color.Green("LadonGo "+ver+" by k8gege")
+	color.Yellow("LadonGo "+ver+" by k8gege")
 	fmt.Println("Arch: "+runtime.GOARCH+" OS: "+runtime.GOOS)
 	if icmp.IcmpOK("localhost") {
 	isicmp=true}
@@ -248,6 +249,10 @@ func main() {
 			exp.PhpStudyDoorHelp()
 			os.Exit(0)
 		}
+		if SecPar == "PHPSHELL" || SecPar == "PHPWEBSHELL" {
+			rexec.PhpShellHelp()
+			os.Exit(0)
+		}
 		fmt.Println(SecPar,"Moudle Not Found")
 		os.Exit(0)
 	}
@@ -255,14 +260,28 @@ func main() {
 	EndPar := os.Args[ParLen-1]
 	Target := os.Args[ParLen-2]
 
-	if ParLen==4 {
-		ThirdPar := strings.ToUpper(os.Args[2])	
-		fmt.Println("Load "+ThirdPar)
+	if ParLen==5 {
+		SecPar := strings.ToUpper(os.Args[1])
+		if SecPar == "PHPSHELL" || SecPar == "PHPWEBSHELL" {
+			fmt.Println("Load "+SecPar)
+			rexec.PhpShellExec(os.Args[2],os.Args[3],os.Args[4])
+			os.Exit(0)
+		}
+	} else if ParLen==4 {
+		ThirdPar := strings.ToUpper(os.Args[2])			
 		if ThirdPar == "PORTSCAN" || ThirdPar == "SCANPORT"|| ThirdPar == "TCPSCAN" || ThirdPar == "TCPBANNER"|| ThirdPar == "PORTSCANBNNER" || ThirdPar == "SCANPORTBANNER"  {
+			fmt.Println("Load "+ThirdPar)
 			EndPar = ThirdPar
 			Target = os.Args[1]
 			scanports = strings.ToUpper(os.Args[3])
 			fmt.Println("port "+scanports)
+		}
+
+		SecPar := strings.ToUpper(os.Args[1])
+		fmt.Println("Load "+SecPar)
+		if SecPar == "PHPSTUDYDOOR" || SecPar == "PHPSTUDYBACKDOOR" ||SecPar == "PHPSTUDYRCE"||SecPar == "PHPSTUDYEXP" {
+			exp.PhpStudyDoorExp(os.Args[2],os.Args[3])
+			os.Exit(0)
 		}
 	} else if ParLen>4 {
 		SecPar := strings.ToUpper(os.Args[1])
@@ -275,15 +294,11 @@ func main() {
 			ssh.ExecCmd(os.Args[2],os.Args[3],os.Args[4],os.Args[5],os.Args[6])
 			os.Exit(0)
 		}
-		
 
-	}else if ParLen>3 {
+	}else if ParLen>3{
+		fmt.Println("Load ===333")
 		SecPar := strings.ToUpper(os.Args[1])
 		fmt.Println("Load "+SecPar)
-		if SecPar == "PHPSTUDYDOOR" || SecPar == "PHPSTUDYBACKDOOR" ||SecPar == "PHPSTUDYRCE"||SecPar == "PHPSTUDYEXP" {
-			exp.PhpStudyDoorExp(os.Args[2],os.Args[3])
-			os.Exit(0)
-		}
 	}
 	
 	//EndPar := os.Args[ParLen-1]

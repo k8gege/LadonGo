@@ -9,7 +9,7 @@ import (
 	"github.com/k8gege/LadonGo/logger"
 	"fmt"
 	"database/sql"
-	_"github.com/Go-SQL-Driver/MySQL"
+	_"github.com/go-sql-driver/mysql"
 	"strings"
 )
 

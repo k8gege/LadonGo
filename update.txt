@@ -1,6 +1,16 @@
-3.3 2021.01.14
-[u] 修复无权限写文件时，结束密码爆破的BUG
-[u] 修复B段、A段漏扫0段的BUG
+3.4 2021.2.3
+[+] PhpShell 菜刀PHP一句话连接执行命令
+[u] PhpStudyDoor PhpStudy后门执行命令
+
+3.4 2021.2.1
+[+] 添加Make编译
+[+] 添加mod文件
+
+3.3 2021.1.13
+[+] 修复扫描结果无写入权限 结束扫描的BUG
+[+] 修复B段、A段不扫描0段的BUG
+
+3.3 2020.12.22
 [u] PortScan  增加Ruby on Rails默认WEB端口3000
 [+] RedisScan Redis未授权访问扫描
 [u] TcpBanner 范围端口 例子: Ladon ip/24 TcpBanner 80-89
