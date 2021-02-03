@@ -173,9 +173,15 @@ Ladon 192.168.1.8/24 RedisScan<br>
 ```Bash
 Ladon SshCmd host port user pass cmd
 Ladon WinrmCmd host port user pass cmd
+Ladon PhpShell url pass cmd
+Ladon PhpStudyDoor url cmd
 ```
 
+SshCmd & WinrmCmd
 ![image](http://k8gege.org/k8img/LadonGo/LnxSshWinrm.PNG)
+
+PhpShell & PhpStudyDoor
+![image](http://k8gege.org/k8img/LadonGo/phpshell.PNG)
 
 #### 扫C段(192.168.1/c)
  . | . | . 
