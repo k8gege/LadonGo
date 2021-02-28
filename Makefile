@@ -45,9 +45,14 @@ mac: ## Make Darwin (Mac) x86 and x64 Binaries
 	done; \
 	echo "Done."
 
+install: ## Install to System
+	@go build -a -ldflags ${LDFLAGS} -o /usr/local/bin/Ladon
+	@echo "Done."
+	@echo "========Test========"
+	@Ladon
+
 clean: ## Delete any binaries
 	@rm -f ${TARGET}/* ; \
-	go clean -i -n github.com/ropnop/kerbrute ; \
 	echo "Done."
 
 all: ## Make Windows, Linux and Mac x86/x64 Binaries

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	//"github.com/k8gege/LadonGo/worker"
 	//"github.com/k8gege/LadonGo/color" //Only Windows
+	"github.com/k8gege/LadonGo/vul"
 	"github.com/k8gege/LadonGo/t3"
 	"github.com/k8gege/LadonGo/icmp"
 	"github.com/k8gege/LadonGo/snmp"
@@ -108,7 +109,7 @@ func VulDetection() {
 	color.Yellow("\nVulDetection:")
 	fmt.Println("MS17010 \t(Using SMB Protocol to detect MS17010 hosts)")
 	fmt.Println("SmbGhost\t(Using SMB Protocol to detect SmbGhost hosts)")
-	
+	fmt.Println("CVE-2021-21972\t(Check VMware vCenter 6.5 6.7 7.0 Rce Vul)")
 }
 
 func BruteFor() {
@@ -154,7 +155,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.4"
+var ver="3.5"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -425,7 +426,9 @@ func AScan(ScanType string,Target string){
 }
 
 func LadonScan(ScanType string,Target string) {
-	if ScanType == "PINGSCAN" ||ScanType == "PING" {
+	if ScanType == "CVE-2021-21972" {
+		vul.CheckCVE_2021_21972(Target)
+	} else if ScanType == "PINGSCAN" ||ScanType == "PING" {
 		ping.PingName(Target)
 	} else if ScanType == "ICMPSCAN" ||ScanType == "ICMP" {
 		//icmp.Icmp(Target,debugLog)
@@ -534,7 +537,9 @@ func LadonScan(ScanType string,Target string) {
 	}
 }
 func LadonUrlScan(ScanType string,Target string) {
-	if ScanType == "HTTPBANNER" ||ScanType == "WEBBANNER" {
+	if ScanType == "CVE-2021-21972" {
+		vul.CheckCVE_2021_21972(Target)
+	} else if ScanType == "HTTPBANNER" ||ScanType == "WEBBANNER" {
 		http.HttpBanner(Target)
 	} else if ScanType == "HTTPTITLE" || ScanType == "WEBTITLE" {
 		http.ScanTitle(Target)
