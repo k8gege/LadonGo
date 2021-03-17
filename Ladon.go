@@ -110,6 +110,7 @@ func VulDetection() {
 	fmt.Println("MS17010 \t(Using SMB Protocol to detect MS17010 hosts)")
 	fmt.Println("SmbGhost\t(Using SMB Protocol to detect SmbGhost hosts)")
 	fmt.Println("CVE-2021-21972\t(Check VMware vCenter 6.5 6.7 7.0 Rce Vul)")
+	fmt.Println("CVE-2021-26855\t(Check CVE-2021-26855 Microsoft Exchange SSRF)")
 }
 
 func BruteFor() {
@@ -155,7 +156,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.5"
+var ver="3.6"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -426,7 +427,11 @@ func AScan(ScanType string,Target string){
 }
 
 func LadonScan(ScanType string,Target string) {
-	if ScanType == "CVE-2021-21972" {
+	if ScanType == "GETEXFQND"||ScanType == "FINDEXCHANGE" {
+		vul.GetExFQND(Target)
+	} else if ScanType == "CVE-2021-26855" {
+		vul.CheckCVE_2021_26855(Target)
+	} else if ScanType == "CVE-2021-21972" {
 		vul.CheckCVE_2021_21972(Target)
 	} else if ScanType == "PINGSCAN" ||ScanType == "PING" {
 		ping.PingName(Target)

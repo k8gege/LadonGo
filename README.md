@@ -4,11 +4,11 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 ### 简介
-LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.4版本包含26个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell，10种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
+LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.6版本包含28个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell，10种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
 
 ### 开发环境
 OS: Kali 2019 X64<br>
-IDE: 记事本Mousepad<br>
+IDE: Mousepad<br>
 Go:  1.13 Linux<br>
 
 ### 功能模块
@@ -35,7 +35,8 @@ OxidScan |         (Using dcom Protocol enumeration network interfaces)
 -|-
 MS17010 |          (Using SMB Protocol to detect MS17010 hosts)
 SmbGhost |         (Using SMB Protocol to detect SmbGhost hosts)
-
+CVE-2021-21972 |   (Check VMware vCenter 6.5 6.7 7.0 Rce Vul)
+CVE-2021-26855 |   (Check CVE-2021-26855 Microsoft Exchange SSRF)
 
 #### BruteForce
 
@@ -77,6 +78,17 @@ go build Ladon.go
 make windows
 make linux
 make mac
+```
+
+### 一键安装
+#### Linux/Mac
+```Bash
+make install
+```
+
+#### Windows
+```Bash
+go run install.go
 ```
 
 ### 使用教程
