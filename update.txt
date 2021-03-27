@@ -1,5 +1,6 @@
 3.6 2021.3.17
 CVE-2021-26855  (Check CVE-2021-26855 Microsoft Exchange SSRF)
+[+] FindExchange快速定位Exchange主机
 
 3.5 2021.2.26
 [+] CVE-2021-21972  (Check VMware vCenter 6.5 6.7 7.0 Rce Vul)
