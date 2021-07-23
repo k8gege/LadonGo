@@ -168,19 +168,19 @@ func SshAuth(host string, port string, user string, pass string) (result bool,er
 }
 
 func SshScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,22) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := SshAuth(Target, "22", u, p)
-				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"22",u, p)
-					break Loop
-				}
+
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res,err := SshAuth(Target, "22", u, p)
+			if res==true && err==nil {
+				logger.PrintIsok2(ScanType,Target,"22",u, p)
+				break Loop
 			}
 		}
 	}
+
 }
 
 func SshScan(ScanType string,Target string) {

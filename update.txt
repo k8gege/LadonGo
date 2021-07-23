@@ -1,6 +1,28 @@
+3.8 2021.7.23
+[+] MongodbScan Mongodb密码爆破(支持无密码验证)
+
+3.8 2021.5.28
+[+] NbtInfo NBT获取主机信息
+
+3.8 2021.5.11
+[u] 端口开放不需要输出txt
+[u] 修复字典为空不提示的Bug
+
+3.8 2021.5.8
+[+] RouterOSScan (Using RouterOS API Brute-For 8728 Port)
+[+] 支持批量C段、B段 ip24.txt、ip16.txt
+
+3.7 2021.4.21
+[+] CVE-2018-14847  (Export RouterOS Password 6.29 to 6.42)
+Usage: Ladon CVE-2018-14847 ip port
+Example:
+Ladon CVE-2018-14847 192.168.1.8 8291
+Ladon 192.168.1.8/24 CVE-2018-14847
+Ladon 192.168.1.8/b  CVE-2018-14847
+Ladon ip.txt  CVE-2018-14847
+
 3.6 2021.3.17
-CVE-2021-26855  (Check CVE-2021-26855 Microsoft Exchange SSRF)
-[+] FindExchange快速定位Exchange主机
+[+] CVE-2021-26855  (Check CVE-2021-26855 Microsoft Exchange SSRF)
 
 3.5 2021.2.26
 [+] CVE-2021-21972  (Check VMware vCenter 6.5 6.7 7.0 Rce Vul)

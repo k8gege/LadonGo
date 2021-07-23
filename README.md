@@ -4,7 +4,7 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 ### 简介
-LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.6版本包含28个模块功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell，10种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis，存活探测/信息收集/指纹识别OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
+LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.8版本包含32个功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell，10种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis/MongoDB/RouterOS，存活探测/信息收集/指纹识别NbtInfo、OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
 
 ### 开发环境
 OS: Kali 2019 X64<br>
@@ -27,7 +27,7 @@ T3Scan |           (Using T3 Protocol Scan Weblogic hosts)
 PortScan |         (Scan hosts open ports using TCP protocol)
 TcpBanner |        (Scan hosts open ports using TCP protocol)
 OxidScan |         (Using dcom Protocol enumeration network interfaces)
-
+NbtInfo |        (Scan hosts open ports using NBT protocol)
 
 #### VulDetection
 
@@ -37,7 +37,9 @@ MS17010 |          (Using SMB Protocol to detect MS17010 hosts)
 SmbGhost |         (Using SMB Protocol to detect SmbGhost hosts)
 CVE-2021-21972 |   (Check VMware vCenter 6.5 6.7 7.0 Rce Vul)
 CVE-2021-26855 |   (Check CVE-2021-26855 Microsoft Exchange SSRF)
-
+CVE-2018-14847 |   (Export RouterOS Password 6.29 to 6.42)
+ 
+ 
 #### BruteForce
 
  . | . 
@@ -49,6 +51,7 @@ FtpScan |          (Using FTP Protocol to Brute-For 21 Port)
 MysqlScan |        (Using Mysql Protocol to Brute-For 3306 Port)
 MssqlScan |        (Using Mssql Protocol to Brute-For 1433 Port)
 OracleScan |       (Using Oracle Protocol to Brute-For 1521 Port)
+MongodbScan |       (Using Mongodb Protocol to Brute-For 27017 Port)
 WinrmScan |        (Using Winrm Protocol to Brute-For 5985 Port)
 SqlplusScan |      (Using Oracle Sqlplus Brute-For 1521 Port)
 RedisScan |      (Using Redis Protocol to Brute-For 6379 Port)
@@ -171,6 +174,9 @@ Ladon 192.168.1.8/24 MysqlScan<br>
 扫描C段1521端口Oracle服务器弱口令<br>
 Ladon 192.168.1.8/24 OracleScan<br>
 
+扫描C段27017端口MongoDB服务器弱口令<br>
+Ladon 192.168.1.8/24 MongodbScan<br>
+
 扫描C段1521端口Oracle服务器弱口令<br>
 Ladon 192.168.1.8/24 SqlplusScan<br>
 
@@ -179,6 +185,9 @@ Ladon 192.168.1.8/24 WinrmScan<br>
 
 扫描C段6379端口Redis服务器空口令<br>
 Ladon 192.168.1.8/24 RedisScan<br>
+
+扫描C段8728端口RouterOS路由器<br>
+Ladon 192.168.1.8/24 RouterOSScan<br>
 
 ##### 远程命令执行
 
@@ -264,7 +273,7 @@ http://k8gege.org/Download/LadonGo.rar
 
 历史版本: https://github.com/k8gege/Ladon/releases<br>
 7.0版本：http://k8gege.org/Download<br>
-7.8版本：K8小密圈<br>
+8.6版本：K8小密圈<br>
 
 
 <div style="text-align: center; width: 710px; border: green solid 0px;">

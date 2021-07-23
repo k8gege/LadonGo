@@ -29,19 +29,19 @@ func MssqlAuth(ip ,port,user ,pass string) ( result bool,err error) {
 }
 
 func MssqlScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,1433) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := MssqlAuth(Target, "1433", u, p)
-				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"1433",u, p)
-					break Loop
-				}
+
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res,err := MssqlAuth(Target, "1433", u, p)
+			if res==true && err==nil {
+				logger.PrintIsok2(ScanType,Target,"1433",u, p)
+				break Loop
 			}
 		}
 	}
+
 }
 
 func MssqlScan(ScanType string,Target string) {

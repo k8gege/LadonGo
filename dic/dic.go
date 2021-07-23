@@ -18,6 +18,19 @@ if IsExist("userpass.txt") {
 return false
 }
 
+func PwdIsExist() bool{
+if IsExist("userpass.txt") {
+	return true
+}
+if IsExist("user.txt") {
+	return true
+}
+if IsExist("pass.txt") {
+	return true
+}
+return false
+}
+
 func IsExist(f string) bool {
 	_, err := os.Stat(f)
 	return err == nil || os.IsExist(err)
@@ -28,7 +41,11 @@ func TxtRead(filename string) (lines []string) {
 	if err != nil {
 		fmt.Println("Open ",filename,"error, %v", err)
 	}
-
+	fi,_:=os.Stat(filename)
+	if fi.Size() ==0 {
+	fmt.Println("Error: "+filename+" is null!")
+	os.Exit(1)
+	}
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -42,11 +59,16 @@ func TxtRead(filename string) (lines []string) {
 	return lines
 }
 func UserDic() (users []string) {
-	file, err := os.Open("user.txt")
+	dicname:="user.txt"
+	file, err := os.Open(dicname)
 	if err != nil {
-		fmt.Println("Open user.txt error, %v", err)
+		fmt.Println("Open "+dicname+" error, %v", err)
 	}
-
+	fi,_:=os.Stat(dicname)
+	if fi.Size() ==0 {
+	fmt.Println("Error: "+dicname+" is null!")
+	os.Exit(1)
+	}
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -61,9 +83,15 @@ func UserDic() (users []string) {
 }
 
 func PassDic() (password []string) {
-	file, err := os.Open("pass.txt")
+	dicname:="pass.txt"
+	file, err := os.Open(dicname)
 	if err != nil {
-		fmt.Println("Open pass.txt error, %v", err)
+		fmt.Println("Open "+dicname+" error, %v", err)
+	}
+	fi,_:=os.Stat(dicname)
+	if fi.Size() ==0 {
+	fmt.Println("Error: "+dicname+" is null!")
+	os.Exit(1)
 	}
 
 	defer file.Close()
@@ -80,9 +108,15 @@ func PassDic() (password []string) {
 }
 
 func UserPassDic() (userpass []string) {
-	file, err := os.Open("userpass.txt")
+	dicname:="userpass.txt"
+	file, err := os.Open(dicname)
 	if err != nil {
-		fmt.Println("Open userpass.txt error, %v", err)
+		fmt.Println("Open "+dicname+" error, %v", err)
+	}
+	fi,_:=os.Stat(dicname)
+	if fi.Size() ==0 {
+	fmt.Println("Error: "+dicname+" is null!")
+	os.Exit(1)
 	}
 
 	defer file.Close()

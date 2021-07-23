@@ -70,7 +70,7 @@ func PortCheck(host string, port int)(result bool) {
 	if conn !=nil{
 		fmt.Println(tcpAddr.IP,tcpAddr.Port,"Open")
 		//TxtWrite(tcpAddr.IP.String()+"\t"+tcpAddr.Port.String()+"\tOpen")
-		TxtWrite(host+"\t"+strconv.Itoa(port)+" Open")
+		//TxtWrite(host+"\t"+strconv.Itoa(port)+" Open")
 		conn.Close()
 		result = true
 	}

@@ -31,16 +31,14 @@ if err = Lftp.Login(user,pass); err == nil {
 }
 
 func FtpScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,21) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := FtpAuth(Target, "21", u, p)
-				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"21",u, p)
-					break Loop
-				}
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res,err := FtpAuth(Target, "21", u, p)
+			if res==true && err==nil {
+				logger.PrintIsok2(ScanType,Target,"21",u, p)
+				break Loop
 			}
 		}
 	}

@@ -35,19 +35,19 @@ func SmbAuth(ip string, port string, username string, password string) ( result 
 }
 
 func SmbScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,445) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := SmbAuth(Target, "445", u, p)
-				if res==true && err==nil {
-					logger.PrintIsok(ScanType,Target,u, p)
-					break Loop
-				}
+
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res,err := SmbAuth(Target, "445", u, p)
+			if res==true && err==nil {
+				logger.PrintIsok(ScanType,Target,u, p)
+				break Loop
 			}
 		}
 	}
+
 }
 
 func SmbScan(ScanType string,Target string) {

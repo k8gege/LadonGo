@@ -15,6 +15,7 @@ import (
 	"github.com/k8gege/LadonGo/port"
 	"github.com/k8gege/LadonGo/http"
 	"github.com/k8gege/LadonGo/smb"
+	"github.com/k8gege/LadonGo/nbt"
 	"github.com/k8gege/LadonGo/ftp"
 	"github.com/k8gege/LadonGo/ssh"
 	"github.com/k8gege/LadonGo/mysql"
@@ -25,8 +26,10 @@ import (
 	"github.com/k8gege/LadonGo/dcom"
 	"github.com/k8gege/LadonGo/exp"
 	"github.com/k8gege/LadonGo/dic"
+	"github.com/k8gege/LadonGo/mongodb"
 	//"github.com/k8gege/LadonGo/tcp"
 	"github.com/k8gege/LadonGo/redis"
+	"github.com/k8gege/LadonGo/routeros"
 	"github.com/fatih/color"
 	"strings"
 	"log"
@@ -101,6 +104,7 @@ func Detection() {
 	fmt.Println("PortScan\t(Scan hosts open ports using TCP protocol)")	
 	fmt.Println("TcpBanner\t(Scan hosts open ports using TCP protocol)")	
 	fmt.Println("OxidScan \t(Using dcom Protocol enumeration network interfaces)")
+	fmt.Println("NbtInfo\t(Scan hosts open ports using NBT protocol)")	
 }
 
 func VulDetection() {
@@ -124,8 +128,10 @@ func BruteFor() {
 	fmt.Println("MysqlScan \t(Using Mysql Protocol to Brute-For 3306 Port)")
 	fmt.Println("MssqlScan \t(Using Mssql Protocol to Brute-For 1433 Port)")
 	fmt.Println("OracleScan \t(Using Oracle Protocol to Brute-For 1521 Port)")
+	fmt.Println("MongodbScan \t(Using Mongodb Protocol to Brute-For 27017 Port)")
 	fmt.Println("WinrmScan \t(Using Winrm Protocol to Brute-For 5985 Port)")
 	fmt.Println("SqlplusScan \t(Using Oracle Sqlplus Brute-For 1521 Port)")
+	fmt.Println("RouterOSScan \t(Using RouterOS API Brute-For 8728 Port)")
 }
 
 func RemoteExec() {
@@ -142,7 +148,7 @@ func Exploit() {
 	//} else{fmt.Println("\033[35m\nExploit:\033[0m")}
 	color.Magenta("\nExploit:")
 	fmt.Println("PhpStudyDoor\t(PhpStudy 2016 & 2018 BackDoor Exploit)")
-
+	fmt.Println("CVE-2018-14847\t(Export RouterOS Password 6.29 to 6.42)")
 }
 
 func Noping() {
@@ -156,7 +162,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.6"
+var ver="3.8"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -251,6 +257,10 @@ func main() {
 			exp.PhpStudyDoorHelp()
 			os.Exit(0)
 		}
+		if SecPar == "CVE-2018-14847" {
+			exp.Cve2018_14847Help()
+			os.Exit(0)
+		}
 		if SecPar == "PHPSHELL" || SecPar == "PHPWEBSHELL" {
 			rexec.PhpShellHelp()
 			os.Exit(0)
@@ -285,6 +295,11 @@ func main() {
 			exp.PhpStudyDoorExp(os.Args[2],os.Args[3])
 			os.Exit(0)
 		}
+
+		if SecPar == "CVE-2018-14847" {
+			exp.Cve2018_14847Exp(os.Args[2],os.Args[3])
+			os.Exit(0)
+		}
 	} else if ParLen>4 {
 		SecPar := strings.ToUpper(os.Args[1])
 		fmt.Println("Load "+SecPar)
@@ -306,11 +321,18 @@ func main() {
 	//EndPar := os.Args[ParLen-1]
 	//Target := os.Args[ParLen-2]
 	fmt.Println("Targe: "+Target)
-	if ParLen==3 {	
-		fmt.Println("Load "+EndPar)
-	}
 	//log.Println("Start...")
 	fmt.Println("\nScanStart: "+time.Now().Format("2006-01-02 03:04:05"))	
+	if ParLen==3 {	
+		fmt.Println("Load "+EndPar)
+		ScanType := strings.ToUpper(EndPar)
+		if ScanType == "NBTINFO" {
+			nbt.Info(Target)
+			fmt.Println(" Finished: "+time.Now().Format("2006-01-02 03:04:05"))
+			os.Exit(0)
+		}
+	}
+
 	ScanType := strings.ToUpper(EndPar)
 	if strings.Contains(Target, "/c")||strings.Contains(Target, "/C") {
 		CScan(ScanType,Target)
@@ -323,6 +345,18 @@ func main() {
 	} else if strings.ToUpper(Target)==strings.ToUpper("ip.txt") {
 			for _, ip := range dic.TxtRead(Target) {
 				LadonScan(ScanType,ip)
+			}
+	} else if strings.ToUpper(Target)==strings.ToUpper("ip24.txt") {
+			for _, ip := range dic.TxtRead(Target) {
+				fmt.Println("\nC_Segment: "+ip)
+				fmt.Println("=============================================")
+				CScan(ScanType,ip)	
+			}
+	} else if strings.ToUpper(Target)==strings.ToUpper("ip16.txt") {
+			for _, ip := range dic.TxtRead(Target) {
+				fmt.Println("\nB_Segment: "+ip)
+				fmt.Println("=============================================")
+				BScan(ScanType,ip)	
 			}
 	} else if strings.ToUpper(Target)==strings.ToUpper("url.txt") {
 			for _, ip := range dic.TxtRead(Target) {
@@ -428,9 +462,9 @@ func AScan(ScanType string,Target string){
 
 func LadonScan(ScanType string,Target string) {
 	if ScanType == "GETEXFQND"||ScanType == "FINDEXCHANGE" {
-		vul.GetExFQND(Target)
-	} else if ScanType == "CVE-2021-26855" {
-		vul.CheckCVE_2021_26855(Target)
+		//vul.GetExFQND(Target)
+	//} else if ScanType == "CVE-2021-26855" {
+		//vul.CheckCVE_2021_26855(Target)
 	} else if ScanType == "CVE-2021-21972" {
 		vul.CheckCVE_2021_21972(Target)
 	} else if ScanType == "PINGSCAN" ||ScanType == "PING" {
@@ -516,6 +550,10 @@ func LadonScan(ScanType string,Target string) {
 		smb.MS17010(Target,3)
 	} else if ScanType == "SMBSCAN" {
 		smb.SmbScan(ScanType,Target)
+	} else if ScanType == "NBTINFO" {
+		//nbt.Info(ScanType,Target)
+		//nbt.Info(Target)
+		//nbt.Info()
 	} else if ScanType == "FTPSCAN" {
 		ftp.FtpScan(ScanType,Target)
 	} else if ScanType == "SMBGHOST"||ScanType == "CVE-2020-0796" {
@@ -526,14 +564,20 @@ func LadonScan(ScanType string,Target string) {
 		mysql.MysqlScan(ScanType,Target)
 	} else if ScanType == "MSSQLSCAN" {
 		mssql.MssqlScan(ScanType,Target)
+	} else if ScanType == "MONGODBSCAN" {
+		mgo.MongoScan(ScanType,Target)
 	} else if ScanType == "ORACLESCAN" {
-		//oracle.OracleScan(ScanType,Target)
+		oracle.OracleScan(ScanType,Target)
 	} else if ScanType == "SQLPLUSSCAN" {
 		oracle.SqlPlusScan(ScanType,Target)
 	} else if ScanType == "WINRMSCAN" {
 		winrm.WinrmScan(ScanType,Target)
 	} else if ScanType == "REDISSCAN" {
 		redis.RedisNullScan(ScanType,Target)
+	} else if ScanType == "ROUTEROSSCAN" {
+		routeros.RouterOSScan(ScanType,Target)
+	} else if ScanType == "CVE-2018-14847" {
+		exp.Cve2018_14847Exp(Target,"8291")
 	} else if ScanType == "HTTPBASICSCAN" ||ScanType == "BASICAUTHSCAN" ||ScanType == "401SCAN"  {
 		http.BasicAuthScan(ScanType,"http://"+Target)
 	} else {

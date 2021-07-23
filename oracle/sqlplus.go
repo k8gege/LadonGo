@@ -26,16 +26,14 @@ return false
 }
 	
 func SqlPlusScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,1521) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res := SqlplusAuth(Target, "1521", u, p,"orcl")
-				if res {
-					logger.PrintIsok2(ScanType,Target,"1521",u, p)
-					break Loop
-				}
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res := SqlplusAuth(Target, "1521", u, p,"orcl")
+			if res {
+				logger.PrintIsok2(ScanType,Target,"1521",u, p)
+				break Loop
 			}
 		}
 	}

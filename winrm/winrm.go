@@ -35,19 +35,18 @@ func WinrmAuth(host,user,pass string,port int)(result bool,err error){
 }
 
 func WinrmScan2(ScanType string,Target string) {
-	if port.PortCheck(Target,5985) {
-		Loop:
-		for _, u := range dic.UserDic() {
-			for _, p := range dic.PassDic() {
-				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := WinrmAuth(Target, u, p,5985)
-				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"5985",u, p)
-					break Loop
-				}
+	Loop:
+	for _, u := range dic.UserDic() {
+		for _, p := range dic.PassDic() {
+			fmt.Println("Check... "+Target+" "+u+" "+p)
+			res,err := WinrmAuth(Target, u, p,5985)
+			if res==true && err==nil {
+				logger.PrintIsok2(ScanType,Target,"5985",u, p)
+				break Loop
 			}
 		}
 	}
+
 }
 
 func WinrmScan(ScanType string,Target string) {

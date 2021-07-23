@@ -1,47 +1,45 @@
-package mysql
+package routeros
 //Ladon Scanner for golang 
 //Author: k8gege
 //K8Blog: http://k8gege.org/Ladon
 //Github: https://github.com/k8gege/LadonGo
 import (
+	"fmt"
+	"strings"
+	"github.com/go-routeros/routeros"
 	"github.com/k8gege/LadonGo/port"
 	"github.com/k8gege/LadonGo/dic"
 	"github.com/k8gege/LadonGo/logger"
-	"fmt"
-	"database/sql"
-	_"github.com/go-sql-driver/mysql"
-	"strings"
 )
 
-func MysqlAuth(ip string, port string, user string, pass string) ( result bool,err error) {
+func RouterOSAuth(ip string, port string, user string, pass string) ( result bool,err error) {
 	result = false
-    db, err := sql.Open("mysql", user+":"+pass+"@tcp("+ip+":"+port+")/mysql?charset=utf8")
-    if err != nil {
+    _, err = routeros.Dial(ip+":"+port,user,pass)
+    if err == nil {
+	result = true
     }
-	if db.Ping()==nil {
-		result = true
-	}
+
+	//defer c.Close()
+
 	return result,err
 }
 
-func MysqlScan2(ScanType string,Target string) {
-
+func RouterOSScan2(ScanType string,Target string) {
 	Loop:
 	for _, u := range dic.UserDic() {
 		for _, p := range dic.PassDic() {
 			fmt.Println("Check... "+Target+" "+u+" "+p)
-			res,err := MysqlAuth(Target, "3306", u, p)
+			res,err := RouterOSAuth(Target, "8728", u, p)
 			if res==true && err==nil {
-				logger.PrintIsok2(ScanType,Target,"3306",u, p)
+				logger.PrintIsok2(ScanType,Target,"8728",u, p)
 				break Loop
 			}
 		}
 	}
-
 }
 
-func MysqlScan(ScanType string,Target string) {
-	if port.PortCheck(Target,3306) {
+func RouterOSScan(ScanType string,Target string) {
+	if port.PortCheck(Target,8728) {
 		if dic.UserPassIsExist() {
 			Loop:
 			for _, up := range dic.UserPassDic() {
@@ -49,15 +47,17 @@ func MysqlScan(ScanType string,Target string) {
 				u := s[0]
 				p := s[1]
 				fmt.Println("Check... "+Target+" "+u+" "+p)
-				res,err := MysqlAuth(Target, "3306", u, p)
+				res,err := RouterOSAuth(Target, "8728", u, p)
 				if res==true && err==nil {
-					logger.PrintIsok2(ScanType,Target,"3306",u, p)
+					logger.PrintIsok2(ScanType,Target,"8728",u, p)
 					break Loop
 				}
 				
 			}
 		} else {
-			MysqlScan2(ScanType,Target)	
+			RouterOSScan2(ScanType,Target)	
 		}
 	}
 }
+
+
