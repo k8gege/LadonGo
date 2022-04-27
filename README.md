@@ -3,6 +3,15 @@
 ### Wiki
 http://k8gege.org/Ladon/LadonGo.html<br>
 
+[![Author](https://img.shields.io/badge/Author-k8gege-blueviolet)](https://github.com/k8gege) 
+[![Ladon](https://img.shields.io/badge/LadonGo-3.9-yellowgreen)](https://github.com/k8gege/LadonGo) 
+[![Bin](https://img.shields.io/badge/LadonGo-Bin-ff69b4)](https://github.com/k8gege/LadonGo/releases) 
+[![GitHub issues](https://img.shields.io/github/issues/k8gege/LadonGo)](https://github.com/k8gege/LadonGo/issues) 
+[![Github Stars](https://img.shields.io/github/stars/k8gege/LadonGo)](https://github.com/k8gege/LadonGo) 
+[![GitHub forks](https://img.shields.io/github/forks/k8gege/LadonGo)](https://github.com/k8gege/LadonGo)
+[![GitHub license](https://img.shields.io/github/license/k8gege/LadonGo)](https://github.com/k8gege/LadonGo)
+[![Downloads](https://img.shields.io/github/downloads/k8gege/LadonGo/total?label=Release%20Download)](https://github.com/k8gege/LadonGo/releases/latest)
+
 ### 简介
 LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.9版本包含36个功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell、JspShell、GoWebShell、L，12种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis/MongoDB/RouterOS，存活探测/信息收集/指纹识别NbtInfo、OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
 
