@@ -1,5 +1,17 @@
+3.9 2022.4.22
+[+]GoWebShell	目标无需存在WEB，HTTP正向后门
+[+]LnxRevShell	Linux Bash反弹shell TCP反向
+[+]WinJspShell 
+[+]LnxJspShell
+代理太卡，菜刀连接内网无法执行命令
+
+
+3.9 2022.4.18
+[+] 默认输出当前主机名
+[+] 默认输出系统版本
+
 3.8 2021.7.23
-[+] MongodbScan Mongodb密码爆破(支持无密码验证)
+[+] MongodbScan Mongodb密码爆破
 
 3.8 2021.5.28
 [+] NbtInfo NBT获取主机信息

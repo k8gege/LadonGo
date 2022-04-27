@@ -7,6 +7,7 @@ import (
 	"fmt"
 	//"github.com/k8gege/LadonGo/worker"
 	//"github.com/k8gege/LadonGo/color" //Only Windows
+	"github.com/k8gege/LadonGo/info"
 	"github.com/k8gege/LadonGo/vul"
 	"github.com/k8gege/LadonGo/t3"
 	"github.com/k8gege/LadonGo/icmp"
@@ -26,7 +27,6 @@ import (
 	"github.com/k8gege/LadonGo/dcom"
 	"github.com/k8gege/LadonGo/exp"
 	"github.com/k8gege/LadonGo/dic"
-	"github.com/k8gege/LadonGo/mongodb"
 	//"github.com/k8gege/LadonGo/tcp"
 	"github.com/k8gege/LadonGo/redis"
 	"github.com/k8gege/LadonGo/routeros"
@@ -104,7 +104,9 @@ func Detection() {
 	fmt.Println("PortScan\t(Scan hosts open ports using TCP protocol)")	
 	fmt.Println("TcpBanner\t(Scan hosts open ports using TCP protocol)")	
 	fmt.Println("OxidScan \t(Using dcom Protocol enumeration network interfaces)")
-	fmt.Println("NbtInfo\t(Scan hosts open ports using NBT protocol)")	
+	fmt.Println("NbtInfo \t(Scan hosts open ports using NBT protocol)")	
+	fmt.Println("GetExFQND\t(Scan Exchange FQND host)")
+
 }
 
 func VulDetection() {
@@ -128,10 +130,11 @@ func BruteFor() {
 	fmt.Println("MysqlScan \t(Using Mysql Protocol to Brute-For 3306 Port)")
 	fmt.Println("MssqlScan \t(Using Mssql Protocol to Brute-For 1433 Port)")
 	fmt.Println("OracleScan \t(Using Oracle Protocol to Brute-For 1521 Port)")
-	fmt.Println("MongodbScan \t(Using Mongodb Protocol to Brute-For 27017 Port)")
 	fmt.Println("WinrmScan \t(Using Winrm Protocol to Brute-For 5985 Port)")
-	fmt.Println("SqlplusScan \t(Using Oracle Sqlplus Brute-For 1521 Port)")
-	fmt.Println("RouterOSScan \t(Using RouterOS API Brute-For 8728 Port)")
+	fmt.Println("SqlplusScan\t(Using Oracle Sqlplus Brute-For 1521 Port)")
+	fmt.Println("RouterOSScan\t(Using RouterOS API Brute-For 8728 Port)")
+	fmt.Println("RedisScan \t(Using Rdis API Brute-For 6379 Port)")
+	fmt.Println("MongodbScan\t(Using Mongodb API Brute-For 27017 Port)")
 }
 
 func RemoteExec() {
@@ -141,6 +144,10 @@ func RemoteExec() {
 	fmt.Println("SshCmd   \t(SSH Remote command execution Default 22 Port)")
 	fmt.Println("WinrmCmd \t(Winrm Remote command execution Default 5985 Port)")
 	fmt.Println("PhpShell \t(PHP Shell Remote command execution Default 80 Port)")
+	fmt.Println("GoWebShell \t(Go WebShell Default http://IP:888/web)")
+	fmt.Println("WinJspShell\t(JSP Shell Remote command execution Default 80 Port)")
+	fmt.Println("LnxJspShell\t(JSP Shell Remote command execution Default 80 Port)")
+	fmt.Println("LnxRevShell \t(Bash Reverse Shell)")
 }
 
 func Exploit() {
@@ -162,7 +169,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.8"
+var ver="3.9"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -190,10 +197,14 @@ var scanports string
 func main() {
 	color.Yellow("LadonGo "+ver+" by k8gege")
 	fmt.Println("Arch: "+runtime.GOARCH+" OS: "+runtime.GOOS)
+	fmt.Print("Name: ")
+	fmt.Print(os.Hostname())
+	fmt.Print("\r\n")
 	if icmp.IcmpOK("localhost") {
 	isicmp=true}
 	GetUser()	
 	fmt.Println("Pid: ",os.Getpid(),"Process:",path.Base(os.Args[0]))
+	info.OSver()
 	scanports=""
 	ParLen := len(os.Args)
 	if ParLen==1 {
@@ -219,6 +230,10 @@ func main() {
 		}
 		if SecPar=="NOPING"{
 			Noping()
+			os.Exit(0)
+		}
+		if SecPar=="GOWEBSHELL"{
+			rexec.GoWebshell()
 			os.Exit(0)
 		}
 		if SecPar=="BRUTEFOR"||SecPar=="BRUTE"||SecPar=="BRUTEFORCE"||SecPar=="BRUTE-FORCE"  {
@@ -265,6 +280,14 @@ func main() {
 			rexec.PhpShellHelp()
 			os.Exit(0)
 		}
+		if SecPar == "WINJSPSHELL" || SecPar == "WINJSPWEBSHELL" {
+			rexec.WinJspShellHelp()
+			os.Exit(0)
+		}
+		if SecPar == "LNXJSPSHELL" || SecPar == "LNXJSPWEBSHELL" {
+			rexec.LnxJspShellHelp()
+			os.Exit(0)
+		}
 		fmt.Println(SecPar,"Moudle Not Found")
 		os.Exit(0)
 	}
@@ -272,6 +295,21 @@ func main() {
 	EndPar := os.Args[ParLen-1]
 	Target := os.Args[ParLen-2]
 
+	if ParLen==4 {
+	SecPar := strings.ToUpper(os.Args[1])
+	if SecPar == "GOWEBSHELL" || SecPar == "GOSHELL" {
+			fmt.Println("Load "+SecPar)
+			rexec.GoWebShell(os.Args[2],os.Args[3])
+			os.Exit(0)
+		}
+	if SecPar == "LNXREVSHELL" || SecPar == "BASHREVSHELL" {
+			fmt.Println("Load "+SecPar)
+			rexec.LnxRevShell(os.Args[2],os.Args[3])
+			os.Exit(0)
+		}
+	fmt.Println(SecPar,"Moudle Not Found")
+	os.Exit(0)
+	}
 	if ParLen==5 {
 		SecPar := strings.ToUpper(os.Args[1])
 		if SecPar == "PHPSHELL" || SecPar == "PHPWEBSHELL" {
@@ -279,6 +317,17 @@ func main() {
 			rexec.PhpShellExec(os.Args[2],os.Args[3],os.Args[4])
 			os.Exit(0)
 		}
+		if SecPar == "WINJSPSHELL" || SecPar == "WINJSPWEBSHELL" {
+			fmt.Println("Load "+SecPar)
+			rexec.JspShellExecWin(os.Args[2],os.Args[3],os.Args[4])
+			os.Exit(0)
+		}
+		if SecPar == "LNXJSPSHELL" || SecPar == "LNXJSPWEBSHELL" {
+			fmt.Println("Load "+SecPar)
+			rexec.JspShellExecLnx(os.Args[2],os.Args[3],os.Args[4])
+			os.Exit(0)
+		}
+		
 	} else if ParLen==4 {
 		ThirdPar := strings.ToUpper(os.Args[2])			
 		if ThirdPar == "PORTSCAN" || ThirdPar == "SCANPORT"|| ThirdPar == "TCPSCAN" || ThirdPar == "TCPBANNER"|| ThirdPar == "PORTSCANBNNER" || ThirdPar == "SCANPORTBANNER"  {
@@ -462,9 +511,9 @@ func AScan(ScanType string,Target string){
 
 func LadonScan(ScanType string,Target string) {
 	if ScanType == "GETEXFQND"||ScanType == "FINDEXCHANGE" {
-		//vul.GetExFQND(Target)
-	//} else if ScanType == "CVE-2021-26855" {
-		//vul.CheckCVE_2021_26855(Target)
+		vul.GetExFQND(Target)
+	} else if ScanType == "CVE-2021-26855" {
+		vul.CheckCVE_2021_26855(Target)
 	} else if ScanType == "CVE-2021-21972" {
 		vul.CheckCVE_2021_21972(Target)
 	} else if ScanType == "PINGSCAN" ||ScanType == "PING" {
@@ -564,10 +613,8 @@ func LadonScan(ScanType string,Target string) {
 		mysql.MysqlScan(ScanType,Target)
 	} else if ScanType == "MSSQLSCAN" {
 		mssql.MssqlScan(ScanType,Target)
-	} else if ScanType == "MONGODBSCAN" {
-		mgo.MongoScan(ScanType,Target)
 	} else if ScanType == "ORACLESCAN" {
-		oracle.OracleScan(ScanType,Target)
+		//oracle.OracleScan(ScanType,Target)
 	} else if ScanType == "SQLPLUSSCAN" {
 		oracle.SqlPlusScan(ScanType,Target)
 	} else if ScanType == "WINRMSCAN" {
