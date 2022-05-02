@@ -114,7 +114,7 @@ go run install.go
 Ladon FuncList
 Ladon Detection
 Ladon VulDetection
-adon BruteFor
+Ladon BruteFor
 Ladon RemoteExec
 Ladon Exploit
 Ladon Example
