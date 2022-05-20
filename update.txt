@@ -1,3 +1,6 @@
+4.0 2022.5.20
+[+]Socks5		一键开启正向Socks5代理
+
 3.9 2022.4.22
 [+]GoWebShell	目标无需存在WEB，HTTP正向后门
 [+]LnxRevShell	Linux Bash反弹shell TCP反向

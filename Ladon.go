@@ -31,6 +31,7 @@ import (
 	"github.com/k8gege/LadonGo/redis"
 	"github.com/k8gege/LadonGo/routeros"
 	"github.com/fatih/color"
+	"github.com/k8gege/socks5"
 	"strings"
 	"log"
 	"time"
@@ -169,7 +170,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="3.9"
+var ver="4.0"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -288,6 +289,10 @@ func main() {
 			rexec.LnxJspShellHelp()
 			os.Exit(0)
 		}
+		if SecPar == "SOCKS5" {
+			fmt.Println("Usage: Ladon Socks5 ip port")
+			os.Exit(0)
+		}
 		fmt.Println(SecPar,"Moudle Not Found")
 		os.Exit(0)
 	}
@@ -305,6 +310,20 @@ func main() {
 	if SecPar == "LNXREVSHELL" || SecPar == "BASHREVSHELL" {
 			fmt.Println("Load "+SecPar)
 			rexec.LnxRevShell(os.Args[2],os.Args[3])
+			os.Exit(0)
+		}
+	if SecPar == "SOCKS5" {
+			fmt.Println("Load "+SecPar)
+			conf := &socks5.Config{}
+			server, err := socks5.New(conf)
+			if err != nil {
+			  panic(err)
+			}
+			fmt.Printf("Socks5 Starting...\n")
+			fmt.Printf("Listen: "+os.Args[2]+" "+os.Args[3]+"\n")
+			if err := server.ListenAndServe("tcp", os.Args[2]+":"+os.Args[3]); err != nil {
+			  panic(err)
+			}
 			os.Exit(0)
 		}
 	fmt.Println(SecPar,"Moudle Not Found")
