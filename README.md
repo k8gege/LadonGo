@@ -13,7 +13,7 @@ http://k8gege.org/Ladon/LadonGo.html<br>
 [![Downloads](https://img.shields.io/github/downloads/k8gege/LadonGo/total?label=Release%20Download)](https://github.com/k8gege/LadonGo/releases/latest)
 
 ### 简介
-LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。3.9版本包含36个功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell、JspShell、GoWebShell、L，12种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis/MongoDB/RouterOS，存活探测/信息收集/指纹识别NbtInfo、OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan。<br>
+LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。4.0版本包含37个功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell、JspShell、GoWebShell、L，12种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis/MongoDB/RouterOS，存活探测/信息收集/指纹识别NbtInfo、OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan,正向Socks5代理。<br>
 
 ### 开发环境
 OS: Kali 2019 X64<br>
@@ -83,6 +83,12 @@ LnxRevShell   |  (Bash Reverse Shell)
 PhpStudyDoor |     (PhpStudy 2016 & 2018 BackDoor Exploit)
 CVE-2018-14847 |   (Export RouterOS Password 6.29 to 6.42)
 
+#### Socks5
+
+ . | . 
+-|-
+Socks5 |     (Socks5 forward proxy server)
+
 ### 源码编译
 ```Bash
 go get github.com/k8gege/LadonGo
@@ -137,6 +143,9 @@ URL列表 Ladon url.txt HttpBanner
 ```
 
 #### 例子
+
+##### 正向Socks5代理服务器
+Ladon Socks5 192.168.1.8 1080
 
 ##### 信息收集、漏洞检测
 
