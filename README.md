@@ -4,7 +4,7 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 [![Author](https://img.shields.io/badge/Author-k8gege-blueviolet)](https://github.com/k8gege) 
-[![Ladon](https://img.shields.io/badge/LadonGo-3.9-yellowgreen)](https://github.com/k8gege/LadonGo) 
+[![Ladon](https://img.shields.io/badge/LadonGo-4.0-yellowgreen)](https://github.com/k8gege/LadonGo) 
 [![Bin](https://img.shields.io/badge/LadonGo-Bin-ff69b4)](https://github.com/k8gege/LadonGo/releases) 
 [![GitHub issues](https://img.shields.io/github/issues/k8gege/LadonGo)](https://github.com/k8gege/LadonGo/issues) 
 [![Github Stars](https://img.shields.io/github/stars/k8gege/LadonGo)](https://github.com/k8gege/LadonGo) 
