@@ -1,3 +1,16 @@
+4.2 2022.7.12
+[+]EVILARC		压缩文件路径穿越漏洞生成器
+Usage: Ladon EvilArc poc.zip 3 tmp/ lnx test.jsp
+Supported extesions are zip, jar, tar, tar.bz2, tar.gz and tgz
+
+
+4.1 2022.5.30
+[+]For扫描		Ladon 192.168.1.1/f ICMP 
+[+]build		增加mips、mipsle内核
+
+4.1 2022.5.24
+BatchExp		批量执行EXP扫描target.txt
+
 4.0 2022.5.20
 [+]Socks5		一键开启正向Socks5代理
 

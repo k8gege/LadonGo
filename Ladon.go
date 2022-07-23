@@ -24,6 +24,7 @@ import (
 	"github.com/k8gege/LadonGo/oracle"
 	"github.com/k8gege/LadonGo/winrm"
 	"github.com/k8gege/LadonGo/rexec"
+	"github.com/k8gege/LadonGo/lexec"
 	"github.com/k8gege/LadonGo/dcom"
 	"github.com/k8gege/LadonGo/exp"
 	"github.com/k8gege/LadonGo/dic"
@@ -31,7 +32,7 @@ import (
 	"github.com/k8gege/LadonGo/redis"
 	"github.com/k8gege/LadonGo/routeros"
 	"github.com/fatih/color"
-	"github.com/k8gege/socks5"
+	"github.com/armon/go-socks5"
 	"strings"
 	"log"
 	"time"
@@ -157,6 +158,8 @@ func Exploit() {
 	color.Magenta("\nExploit:")
 	fmt.Println("PhpStudyDoor\t(PhpStudy 2016 & 2018 BackDoor Exploit)")
 	fmt.Println("CVE-2018-14847\t(Export RouterOS Password 6.29 to 6.42)")
+	fmt.Println("BatchExp\t(Execute EXP scan target.txt)")
+	fmt.Println("EvilArc\t(Create archive a file with directory traversal)")
 }
 
 func Noping() {
@@ -170,7 +173,7 @@ func Noping() {
 }
 
 var isicmp bool
-var ver="4.0"
+var ver="4.x"
 func incIP(ip net.IP) {
 	for j := len(ip) - 1; j >= 0; j-- {
 		ip[j]++
@@ -196,7 +199,7 @@ func GetUser(){
 var debugLog *log.Logger
 var scanports string
 func main() {
-	color.Yellow("LadonGo "+ver+" by k8gege")
+	color.Yellow("LadonGo 4.2 by k8gege")
 	fmt.Println("Arch: "+runtime.GOARCH+" OS: "+runtime.GOOS)
 	fmt.Print("Name: ")
 	fmt.Print(os.Hostname())
@@ -293,6 +296,18 @@ func main() {
 			fmt.Println("Usage: Ladon Socks5 ip port")
 			os.Exit(0)
 		}
+		if SecPar == "BATCHEXP" {
+			fmt.Println("Usage: Ladon BatchExp cmdline SuccessTag")
+			fmt.Println("Usage: Ladon BatchExp \"exp.exe $url$ whoami\" ISOK")
+			fmt.Println("Usage: Ladon BatchExp \"./exp $url$ whoami\" ISVUL")
+			os.Exit(0)
+		}
+		if SecPar == "EVILARC" {
+			fmt.Println("Usage: Ladon EvilArc poc.zip 3 tmp/ lnx test.jsp")
+			fmt.Println("Supported extesions are zip, jar, tar, tar.bz2, tar.gz and tgz")
+			fmt.Println("Ex: WINDOWS\\\\System32\\\\ or var/www/")
+			os.Exit(0)
+		}
 		fmt.Println(SecPar,"Moudle Not Found")
 		os.Exit(0)
 	}
@@ -312,6 +327,19 @@ func main() {
 			rexec.LnxRevShell(os.Args[2],os.Args[3])
 			os.Exit(0)
 		}
+	if SecPar == "BATCHEXP" {
+			fmt.Println("Load "+SecPar)
+			for _, ip := range dic.TxtRead("target.txt") {
+				fmt.Println("Target: "+ip)
+				lcmd:=os.Args[2]
+				if strings.Contains(lcmd, "*target*"){				
+					lcmd=strings.Replace(lcmd,"*target*", ip, -1)
+				}
+				fmt.Println("PocCmd: "+lcmd)
+				lexec.Exec(lcmd)
+			}
+			os.Exit(0)
+		}
 	if SecPar == "SOCKS5" {
 			fmt.Println("Load "+SecPar)
 			conf := &socks5.Config{}
@@ -327,6 +355,16 @@ func main() {
 			os.Exit(0)
 		}
 	fmt.Println(SecPar,"Moudle Not Found")
+	os.Exit(0)
+	}
+	if ParLen==7 {
+	SecPar := strings.ToUpper(os.Args[1])
+	if SecPar == "EVILARC" {
+		fmt.Println("Load "+SecPar)
+		depth,_:=strconv.Atoi(os.Args[3])
+		exp.EvilArc(os.Args[2],depth,os.Args[4],os.Args[5],os.Args[6])
+		os.Exit(0)
+		}
 	os.Exit(0)
 	}
 	if ParLen==5 {
@@ -402,7 +440,9 @@ func main() {
 	}
 
 	ScanType := strings.ToUpper(EndPar)
-	if strings.Contains(Target, "/c")||strings.Contains(Target, "/C") {
+	if strings.Contains(Target, "/f")||strings.Contains(Target, "/F") {
+		ForScan(ScanType,Target)
+	} else if strings.Contains(Target, "/c")||strings.Contains(Target, "/C") {
 		CScan(ScanType,Target)
 	} else if strings.Contains(Target, "/b")||strings.Contains(Target, "/B") {
 		BScan(ScanType,Target)
@@ -486,6 +526,20 @@ fmt.Println("CFinished: "+time.Now().Format("2006-01-02 03:04:05"))
 func End(){
 fmt.Println(" Finished: "+time.Now().Format("2006-01-02 03:04:05"))
 os.Exit(0)
+}
+func ForScan(ScanType string,Target string){
+	ip := strings.Replace(Target, "/f", "", -1)
+	ip = strings.Replace(ip, "/F", "", -1)
+	ips := strings.Split(ip,".")
+	ip = ips[0]+"."+ips[1]+"."+ips[2]
+
+	for i:=1;i<256;i++ {
+		ip:=fmt.Sprintf("%s.%d",ip,i)
+			fmt.Println("c...: "+ip)
+			LadonScan(ScanType,ip);
+	}
+
+	CEnd()
 }
 func CScan(ScanType string,Target string){
 	ip := strings.Replace(Target, "/c", "", -1)
