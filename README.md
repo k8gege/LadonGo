@@ -305,6 +305,6 @@ http://k8gege.org/Download/LadonGo.rar
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/L-codes/LadonGo.svg)](https://starchart.cc/L-codes/LadonGo)
+[![Stargazers over time](https://starchart.cc/k8gege/LadonGo.svg)](https://starchart.cc/k8gege/LadonGo)
 
 <img align='right' src="https://profile-counter.glitch.me/LadonGo/count.svg" width="200">
