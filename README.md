@@ -4,7 +4,7 @@
 http://k8gege.org/Ladon/LadonGo.html<br>
 
 [![Author](https://img.shields.io/badge/Author-k8gege-blueviolet)](https://github.com/k8gege) 
-[![Ladon](https://img.shields.io/badge/LadonGo-4.0-yellowgreen)](https://github.com/k8gege/LadonGo) 
+[![Ladon](https://img.shields.io/badge/LadonGo-4.2-yellowgreen)](https://github.com/k8gege/LadonGo) 
 [![Bin](https://img.shields.io/badge/LadonGo-Bin-ff69b4)](https://github.com/k8gege/LadonGo/releases) 
 [![GitHub issues](https://img.shields.io/github/issues/k8gege/LadonGo)](https://github.com/k8gege/LadonGo/issues) 
 [![Github Stars](https://img.shields.io/github/stars/k8gege/LadonGo)](https://github.com/k8gege/LadonGo) 
@@ -294,11 +294,17 @@ http://k8gege.org/Download/LadonGo.rar
 #### Ladon (Windows & Cobalt Strike)
 
 历史版本: https://github.com/k8gege/Ladon/releases<br>
-7.0版本：http://k8gege.org/Download<br>
-8.6版本：K8小密圈<br>
+911版本：http://k8gege.org/Download<br>
+9.1.8版本：K8小密圈<br>
 
 
 <div style="text-align: center; width: 710px; border: green solid 0px;">
 <img alt="" src="http://k8gege.org/img/k8team.jpg" style="display: inline-block;width: 250px;height: 300px;" />
 </div>
 
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/L-codes/LadonGo.svg)](https://starchart.cc/L-codes/LadonGo)
+
+<img align='right' src="https://profile-counter.glitch.me/LadonGo/count.svg" width="200">
