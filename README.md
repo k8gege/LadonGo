@@ -12,15 +12,21 @@ http://k8gege.org/Ladon/LadonGo.html<br>
 [![GitHub license](https://img.shields.io/github/license/k8gege/LadonGo)](https://github.com/k8gege/LadonGo)
 [![Downloads](https://img.shields.io/github/downloads/k8gege/LadonGo/total?label=Release%20Download)](https://github.com/k8gege/LadonGo/releases/latest)
 
-### 简介
-LadonGo一款开源内网渗透扫描器框架，使用它可轻松一键探测C段、B段、A段存活主机、指纹识别、端口扫描、密码爆破、远程执行、高危漏洞检测等。4.0版本包含37个功能，高危漏洞检测MS17010、SmbGhost，远程执行SshCmd、WinrmCmd、PhpShell、JspShell、GoWebShell、L，12种协议密码爆破Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Redis/MongoDB/RouterOS，存活探测/信息收集/指纹识别NbtInfo、OnlinePC、Ping、Icmp、SnmpScan，HttpBanner、HttpTitle、TcpBanner、WeblogicScan、OxidScan，端口扫描/服务探测PortScan,正向Socks5代理。<br>
+### Introduction
 
-### 开发环境
+LadonGo is an open source intranet penetration scanner framework, which can be used to easily detect segment C, B, A live hosts, fingerprint identification, port scanning, password explosion, remote execution, high-risk vulnerability detection, etc. Version 4.0 includes 37 functions, high risk vulnerability detection MS17010, SmbGhost, remote execution of SshCmd, WinrmCmd, PhpShell, JspShell, GoWebShell, L, 12 protocol password explosion Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Edits/MongoDB/RouterOS, survival detection/information collection/fingerprint identification NbtInfo, OnlinePC, Ping, Icmp, SnmpScan, HttpBanner, HttpTitle, TcpBanner, WeblogicScan, O xidScan, Port scan / service probe portscan, forward to Socks5 proxy< br>
+
+
+### Development environment
+
 OS: Kali 2019 X64<br>
-IDE: Mousepad<br>
-Go:  1.13 Linux<br>
 
-### 功能模块
+IDE: Mousepad<br>
+
+Go: 1.13 Linux<br>
+
+
+### Function module
 
 #### Detection
 
@@ -89,20 +95,20 @@ CVE-2018-14847 |   (Export RouterOS Password 6.29 to 6.42)
 -|-
 Socks5 |     (Socks5 forward proxy server)
 
-### 源码编译
+### Build
 ```Bash
 go get github.com/k8gege/LadonGo
 go build Ladon.go
 ```
 
-### 快速编译
+### Make
 ```Bash
 make windows
 make linux
 make mac
 ```
 
-### 一键安装
+### Install
 #### Linux/Mac
 ```Bash
 make install
@@ -113,9 +119,9 @@ make install
 go run install.go
 ```
 
-### 使用教程
+### Usage
 
-#### 帮助
+#### help
 ```Bash
 Ladon FuncList
 Ladon Detection
@@ -126,92 +132,136 @@ Ladon Exploit
 Ladon Example
 ```
 
-#### 用法
-Ladon IP/机器名/CIDR/URL/txt 扫描模块
+#### Usage
+Ladon IP/pcname/CIDR/URL/txt moudle
 
 ```Bash
-IP Ladon 192.168.1.8 MS17010
-C段 Ladon 192.168.1.8/24 MS17010
-C段 Ladon 192.168.1/c MS17010
-B段 Ladon 192.168/b MS17010
-A段 Ladon 192/a MS17010
+Ladon 192.168.1.8 MS17010
+Ladon 192.168.1.8/24 MS17010
+Ladon 192.168.1/c MS17010
+Ladon 192.168/b MS17010
+Ladon 192/a MS17010
 
-C段(1-5) Ladon 192.168.1-192.168.5 MS17010
-URL Ladon http://192.168.1.8:8080 BasicAuthScan
-IP列表  Ladon ip.txt MS17010
-URL列表 Ladon url.txt HttpBanner
+Ladon 192.168.1-192.168.5 MS17010
+Ladon http://192.168.1.8:8080 BasicAuthScan
+Ladon ip.txt MS17010
+Ladon url.txt HttpBanner
 ```
 
-#### 例子
+#### Examples
 
-##### 正向Socks5代理服务器
+
+##### Forward Socks5 proxy server
+
 Ladon Socks5 192.168.1.8 1080
 
-##### 信息收集、漏洞检测
 
-Ping扫描C段存活主机（任意权限）<br>
+##### Information collection and vulnerability detection
+
+
+Ping scan segment C live hosts (with any permission) < br >
+
 Ladon 192.168.1.8/24 PingScan<br>
 
-ICMP扫描C段存活主机(管理员权限)<br>
+
+ICMP scanning section C survival host (administrator authority)<br>
+
 Ladon 192.168.1.8/24 IcmpScan<br>
 
-SNMP扫描C段存活主机、设备信息<br>
+
+SNMP scanning of surviving hosts and devices in Segment C<br>
+
 Ladon 192.168.1.8/24 SnmpScan<br>
 
-SMB扫描C段永恒之蓝MS17010漏洞主机<br>
+
+SMB scans C-segment eternal blue ms17010 vulnerable hosts < br >
+
 Ladon 192.168.1.8/24 MS17010<br>
 
-SMB扫描C段永恒之黑SmbGhost漏洞主机<br>
+
+SMB scans C-segment eternal black smbghost vulnerability host < br >
+
 Ladon 192.168.1.8/24 SmbGhost<br>
 
-T3扫描C段开放WebLogic的主机<br>
+
+T3 scans the hosts with open WebLogic in Segment C<br>
+
 Ladon 192.168.1.8/24 T3Scan<br>
 
-HTTP扫描C段开放Web站点Banner<br>
+
+HTTP scanning C-segment open Web site Banner<br>
+
 Ladon 192.168.1.8/24 BannerScan<br>
 
-HTTP扫描C段开放Web站点标题<br>
+
+HTTP scanning section C open Web site title<br>
+
 Ladon 192.168.1.8/24 HttpTitle<br>
 
-TCP扫描C段开放端口服务信息<br>
+
+TCP scans the open port service information of section C. < br >
+
 Ladon 192.168.1.8/24 TcpBanner<br>
 
-TCP扫描C段主机常见开放端口<br>
+
+TCP scans common open ports of segment C hosts<br>
+
 Ladon 192.168.1.8/24 PortScan<br>
 
-##### 密码爆破、弱口令
 
-扫描C段445端口Windows机器弱口令<br>
+##### Password explosion, weak password
+
+
+Scan weak password of windows machine on port 445 of section C. < br >
+
 Ladon 192.168.1.8/24 SmbScan<br>
 
-扫描C段22端口Linux机器SSH弱口令<br>
+
+Scan the SSH weak password of the 22 port Linux machine in section C<br>
+
 Ladon 192.168.1.8/24 SshScan<br>
 
-扫描C段21端口FTP服务器弱口令<br>
+
+Scan the weak password of FTP server on port 21 of section C. < br >
+
 Ladon 192.168.1.8/24 FtpScan<br>
 
-扫描C段3306端口Mysql服务器弱口令<br>
+
+Scan the weak password of MySQL server on port 3306 in section C<br>
+
 Ladon 192.168.1.8/24 MysqlScan<br>
 
-扫描C段1521端口Oracle服务器弱口令<br>
+
+Scan weak password of Oracle server on port 1521 in segment C<br>
+
 Ladon 192.168.1.8/24 OracleScan<br>
 
-扫描C段27017端口MongoDB服务器弱口令<br>
+
+Scan the weak password of MongoDB server on port 27017 in section C<br>
+
 Ladon 192.168.1.8/24 MongodbScan<br>
 
-扫描C段1521端口Oracle服务器弱口令<br>
+
+Scan weak password of Oracle server on port 1521 of section C. < br >
+
 Ladon 192.168.1.8/24 SqlplusScan<br>
 
-扫描C段5985端口Winrm服务器弱口令<br>
+
+Scan section C 5985 port Winrm server weak password<br>
+
 Ladon 192.168.1.8/24 WinrmScan<br>
 
-扫描C段6379端口Redis服务器空口令<br>
+
+Scan the empty password of redis server on port 6379 of section C. < br >
+
 Ladon 192.168.1.8/24 RedisScan<br>
 
-扫描C段8728端口RouterOS路由器<br>
+
+Scan C-segment 8728 port Routeros router < br >
+
 Ladon 192.168.1.8/24 RouterOSScan<br>
 
-##### 远程命令执行
+##### Remote command execution
 
 ```Bash
 Ladon SshCmd host port user pass cmd
@@ -226,27 +276,30 @@ SshCmd & WinrmCmd
 PhpShell & PhpStudyDoor
 ![image](http://k8gege.org/k8img/LadonGo/phpshell.PNG)
 
-#### 扫C段(192.168.1/c)
+#### SCAN IP/24 (192.168.1/c)
  . | . | . 
 -|-|-
-ICMP |3毫秒  |1/20秒
-WebTitle| 10毫秒| 1/6秒
-T3Scan |15毫秒| 1/4秒
-EthScan |2毫秒 | 1/30秒
+ICMP |3ms  |1/20s
+WebTitle| 10ms| 1/6s
+T3Scan |15ms| 1/4s
+EthScan |2ms | 1/30s
 
-#### 扫B段(192.168/b)
+#### Scan B(192.168/b)
  . | . | . 
 -|-|-
-EthScan  | 23分钟 |  1个端口
-T3Scan   |  1小时 |  4个端口
-WebTitle | 40分钟 | 1个端口
-MS17010  |12分钟 | 1个端口
-Snmp    |  20分钟| 1个端口
+EthScan  | 23Min |  1 Port
+T3Scan   |  1h |  4 Port
+WebTitle | 40Min | 1 Port
+MS17010  |12Min | 1 Port
+Snmp    |  20Min| 1 Port
 
-PS：扫描速度实际上和Ladon .net版速度也差不多，只是没专门记录，因为重写测试过程中顺便记录一下GO版速度
+PS: the scanning speed is actually similar to the speed of Ladon. Net version, but there is no special record, because the speed of go version is recorded by the way during the rewrite test
 
-### 跨平台/全平台/全系统
-支持新旧操作系统，特别是老旧Linux系统，网上很多工具根本不能用或各种报错
+
+### Cross platform / whole platform / whole system
+
+Support old and new operating systems, especially old Linux systems. Many online tools can't be used at all or various errors are reported
+
 #### TestOn
 
 ID | OS 
@@ -273,7 +326,6 @@ ID | OS
 19 | Ubuntu 8
 20 | Ubuntu 18
 
-以上系统测试成功，其它系统未测，若不支持可自行编译<br>
 
 #### MacOS x64 10.15
 ![image](http://k8gege.org/k8img/LadonGo/MacMS17010.png)
@@ -293,9 +345,8 @@ http://k8gege.org/Download/LadonGo.rar
 
 #### Ladon (Windows & Cobalt Strike)
 
-历史版本: https://github.com/k8gege/Ladon/releases<br>
-911版本：http://k8gege.org/Download<br>
-9.1.8版本：K8小密圈<br>
+History: https://github.com/k8gege/Ladon/releases<br>
+911 Ver：http://k8gege.org/Download<br>
 
 
 <div style="text-align: center; width: 710px; border: green solid 0px;">
