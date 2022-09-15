@@ -16,6 +16,7 @@ http://k8gege.org/Ladon/LadonGo.html<br>
 
 LadonGo is an open source intranet penetration scanner framework, which can be used to easily detect segment C, B, A live hosts, fingerprint identification, port scanning, password explosion, remote execution, high-risk vulnerability detection, etc. Version 4.0 includes 37 functions, high risk vulnerability detection MS17010, SmbGhost, remote execution of SshCmd, WinrmCmd, PhpShell, JspShell, GoWebShell, L, 12 protocol password explosion Smb/Ssh/Ftp/Mysql/Mssql/Oracle/Sqlplus/Winrm/HttpBasic/Edits/MongoDB/RouterOS, survival detection/information collection/fingerprint identification NbtInfo, OnlinePC, Ping, Icmp, SnmpScan, HttpBanner, HttpTitle, TcpBanner, WeblogicScan, O xidScan, Port scan / service probe portscan, forward to Socks5 proxy< br>
 
+LadonGO 4.2 Pentest Scanner framework 全平台Go开源内网渗透扫描器框架,Windows/Linux/Mac内网渗透，使用它可轻松一键批量探测C段、B段、A段存活主机、高危漏洞检测MS17010、SmbGhost，远程执行SSH/Winrm，密码爆破SMB/SSH/FTP/Mysql/Mssql/Oracle/Winrm/HttpBasic/Redis，端口扫描服务识别PortScan指纹识别/HttpBanner/HttpTitle/TcpBanner/Weblogic/Oxid多网卡主机，端口扫描服务识别PortScan。
 
 ### Development environment
 
