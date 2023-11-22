@@ -17,6 +17,7 @@ func MysqlAuth(ip string, port string, user string, pass string) ( result bool,e
 	result = false
     db, err := sql.Open("mysql", user+":"+pass+"@tcp("+ip+":"+port+")/mysql?charset=utf8")
     if err != nil {
+	    return result, err
     }
 	if db.Ping()==nil {
 		result = true
